@@ -1,0 +1,2022 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MONNAKANO</title>
+
+  <style>
+    body {
+      font-family: "Hiragino Maru Gothic ProN", "Maru Gothic", "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      background-color: #fbf8f3;
+      /* 全体の文字：マイルドなクリーム色 ＋ 深いテラコッタオレンジのフチ */
+      color: #fff3cc;
+      text-shadow:
+        2px 2px 0 #e65c00, 2px -2px 0 #e65c00,
+        -2px 2px 0 #e65c00, -2px -2px 0 #e65c00,
+        2px 0px 0 #e65c00, -2px 0px 0 #e65c00,
+        0px 2px 0 #e65c00, 0px -2px 0 #e65c00;
+      box-sizing: border-box;
+      min-height: 100vh;
+    }
+
+    header {
+      background: #e65c00;
+      /* ヘッダー：オレンジ背景に映える クリーム文字 ＋ 完熟トマトレッドのフチ */
+      color: #fff3cc;
+      text-shadow:
+        2px 2px 0 #d9381e, 2px -2px 0 #d9381e,
+        -2px 2px 0 #d9381e, -2px -2px 0 #d9381e,
+        2px 0px 0 #d9381e, -2px 0px 0 #d9381e,
+        0px 2px 0 #d9381e, 0px -2px 0 #d9381e;
+      padding: 16px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(230, 92, 0, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+
+    .controls {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 12px;
+      justify-content: center;
+      background: #fbf8f3;
+    }
+
+    .controls::-webkit-scrollbar {
+      display: none;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px 16px;
+      cursor: pointer;
+      border: 1px solid #f0d8c0;
+      background: white;
+      border-radius: 999px;
+      font-weight: bold;
+      transition: 0.2s;
+      box-shadow: 0 2px 5px rgba(230, 92, 0, 0.08);
+      white-space: nowrap;
+      /* ボタンの文字：クリーム文字 ＋ テラコッタオレンジのフチ */
+      color: #fff3cc;
+      text-shadow:
+        2px 2px 0 #e65c00, 2px -2px 0 #e65c00,
+        -2px 2px 0 #e65c00, -2px -2px 0 #e65c00,
+        2px 0px 0 #e65c00, -2px 0px 0 #e65c00,
+        0px 2px 0 #e65c00, 0px -2px 0 #e65c00;
+    }
+
+    button:hover {
+      background: #fff3e6;
+    }
+
+    button.active {
+      background: #d9381e;
+      color: #fff3cc;
+      text-shadow:
+        2px 2px 0 #e65c00, 2px -2px 0 #e65c00,
+        -2px 2px 0 #e65c00, -2px -2px 0 #e65c00,
+        2px 0px 0 #e65c00, -2px 0px 0 #e65c00,
+        0px 2px 0 #e65c00, 0px -2px 0 #e65c00;
+    }
+
+    .section-label {
+      text-align: center;
+      font-weight: bold;
+      margin-top: 10px;
+      color: #fff3cc;
+      text-shadow:
+        2px 2px 0 #e65c00, 2px -2px 0 #e65c00,
+        -2px 2px 0 #e65c00, -2px -2px 0 #e65c00,
+        2px 0px 0 #e65c00, -2px 0px 0 #e65c00,
+        0px 2px 0 #e65c00, 0px -2px 0 #e65c00;
+    }
+
+    /* メニュータイプ */
+    #menuTypeButtons {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 12px;
+      background: white;
+      position: sticky;
+      top: 72px;
+      z-index: 998;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+    }
+
+    #menuTypeButtons::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* カテゴリ */
+    .category-nav {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      padding: 12px;
+      background: #fff9f2;
+      position: sticky;
+      top: 140px;
+      z-index: 997;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .category-nav::-webkit-scrollbar {
+      display: none;
+    }
+
+    #menu {
+      padding: 16px;
+    }
+
+    h2 {
+      margin-top: 40px;
+      border-left: 6px solid #557a2b;
+      padding-left: 10px;
+      font-size: 26px;
+      /* 見出し：クリーム文字 ＋ 深みのあるトマトレッドのフチ */
+      color: #fff3cc;
+      text-shadow:
+        2px 2px 0 #d9381e, 2px -2px 0 #d9381e,
+        -2px 2px 0 #d9381e, -2px -2px 0 #d9381e,
+        2px 0px 0 #d9381e, -2px 0px 0 #d9381e,
+        0px 2px 0 #d9381e, 0px -2px 0 #d9381e;
+    }
+
+    .menu-item {
+      background: white;
+      margin-bottom: 12px;
+      border-radius: 12px;
+      padding: 14px;
+      box-shadow: 0 2px 8px rgba(230, 92, 0, 0.04);
+      border: 1px solid #fff3e6;
+    }
+
+    .name {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-weight: bold;
+      font-size: 18px;
+      /* 料理名：クリーム文字 ＋ 料理を引き締めるダークブラウンのフチ */
+      color: #fff3cc;
+      text-shadow:
+        2px 2px 0 #943b00, 2px -2px 0 #943b00,
+        -2px 2px 0 #943b00, -2px -2px 0 #943b00,
+        2px 0px 0 #943b00, -2px 0px 0 #943b00,
+        0px 2px 0 #943b00, 0px -2px 0 #943b00;
+    }
+
+    .price {
+      white-space: nowrap;
+      /* 価格：際立つ クリーム文字 ＋ トマトレッドのフチ */
+      color: #fff3cc;
+      text-shadow:
+        2px 2px 0 #d9381e, 2px -2px 0 #d9381e,
+        -2px 2px 0 #d9381e, -2px -2px 0 #d9381e,
+        2px 0px 0 #d9381e, -2px 0px 0 #d9381e,
+        0px 2px 0 #d9381e, 0px -2px 0 #d9381e;
+    }
+
+    @media (max-width: 600px) {
+
+      .name {
+        font-size: 16px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      header {
+        font-size: 24px;
+      }
+    }
+
+    .cocktail-wrapper {
+      display: grid;
+
+      grid-template-columns:
+
+        repeat(auto-fit, minmax(220px, 1fr));
+
+      gap: 16px;
+
+      margin-bottom: 20px;
+    }
+
+    .cocktail-group {
+
+      background: white;
+
+      padding: 14px;
+
+      border-radius: 12px;
+
+      box-shadow: 0 2px 8px rgba(230, 92, 0, 0.04);
+      border: 1px solid #fff3e6;
+    }
+
+    .cocktail-title {
+
+      font-size: 20px;
+
+      font-weight: bold;
+
+      margin-bottom: 10px;
+
+      border-bottom: 2px solid #e65c00;
+
+      padding-bottom: 6px;
+      /* カクテル見出し：クリーム文字 ＋ カクテル画像の枠を意識した鮮やかなイタリアングリーンのフチ */
+      color: #fff3cc;
+      text-shadow:
+        2px 2px 0 #00b050, 2px -2px 0 #00b050,
+        -2px 2px 0 #00b050, -2px -2px 0 #00b050,
+        2px 0px 0 #00b050, -2px 0px 0 #00b050,
+        0px 2px 0 #00b050, 0px -2px 0 #00b050;
+    }
+
+    .cocktail-item {
+
+      padding: 6px 0;
+
+      border-bottom: 1px solid #fff3e6;
+      /* 各カクテルメニュー名：クリーム文字 ＋ 深いブラウンのフチ */
+      color: #fff3cc;
+      text-shadow:
+        2px 2px 0 #943b00, 2px -2px 0 #943b00,
+        -2px 2px 0 #943b00, -2px -2px 0 #943b00,
+        2px 0px 0 #943b00, -2px 0px 0 #943b00,
+        0px 2px 0 #943b00, 0px -2px 0 #943b00;
+    }
+
+    /* ==========================================================================
+   追加・修正：デバイスサイズに合わせたレスポンシブ設定
+   ========================================================================== */
+
+    /* 全体のコンテナとしての基本設定（PC・タブレットで横に広がりすぎないように制限） */
+    body {
+      max-width: 1200px;
+      /* PC版での全体の最大横幅 */
+      margin: 0 auto;
+      /* 画面中央に配置 */
+      box-sizing: border-box;
+    }
+
+    /* 固定ヘッダーやボタンエリアもbodyの最大幅に合わせる */
+    header,
+    .controls,
+    .category-nav,
+    #menuTypeButtons {
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* 通常のメニュー項目（サラダやパスタなど）のレイアウト設定 */
+    #menu {
+      padding: 16px;
+      display: grid;
+      grid-template-columns: 1fr;
+      /* デフォルト（スマホ）は1列 */
+      gap: 20px;
+    }
+
+    /* カテゴリごとのブロック（h2とメニューリストをまとめる調整用） */
+    .category-block {
+      break-inside: avoid;
+    }
+
+    /* メニューアイテムをパッと並べるためのコンテナ */
+    .menu-items-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      /* デフォルト（スマホ）は1列 */
+      gap: 12px;
+    }
+
+    /* ==========================================================================
+   メディアクエリ：タブレット版（画面幅 601px 〜 1024px）
+   ========================================================================== */
+    @media (min-width: 601px) and (max-width: 1024px) {
+      h2 {
+        font-size: 24px;
+      }
+
+      .name {
+        font-size: 17px;
+      }
+
+      /* 通常メニューを2列にする */
+      .menu-items-container {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    /* ==========================================================================
+   メディアクエリ：PC版（画面幅 1025px 以上）
+   ========================================================================== */
+    @media (min-width: 1025px) {
+      header {
+        font-size: 36px;
+        padding: 24px;
+      }
+
+      h2 {
+        font-size: 28px;
+      }
+
+      .name {
+        font-size: 19px;
+      }
+
+      /* 通常メニューを3列にする（すっきり見せたい場合は2列でもOK） */
+      .menu-items-container {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    /* ==========================================================================
+   既存のスマホ版設定（max-width: 600px）の微調整
+   ========================================================================== */
+    @media (max-width: 600px) {
+      .name {
+        font-size: 16px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
+      header {
+        font-size: 24px;
+      }
+
+      /* スマホは1列のまま */
+      .menu-items-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header id="title">MONNAKANO</header>
+
+  <!-- 言語 -->
+  <div class="section-label">Language</div>
+
+  <div class="controls" id="languageButtons">
+    <button onclick="setLanguage('en')">English</button>
+    <button onclick="setLanguage('es')">Spanish</button>
+    <button onclick="setLanguage('zh')">中文</button>
+  </div>
+
+  <!-- メニュータイプ -->
+  <div class="section-label" id="menuTypeLabel">
+    Menu
+  </div>
+
+  <div class="controls" id="menuTypeButtons"></div>
+
+  <!-- カテゴリ -->
+  <div class="category-nav" id="categoryButtons"></div>
+
+  <!-- メニュー -->
+  <div id="menu"></div>
+
+  <script>
+
+    const data = {
+
+      /* =========================
+         ENGLISH
+      ========================== */
+
+      en: {
+
+        title: "MONNAKANO",
+
+        menuTypeLabel: "Menu",
+
+        menuTypes: {
+
+          dinner: {
+
+            label: "Dinner Menu",
+
+            categories: [
+
+              {
+                name: "Salad",
+
+                items: [
+                  { name: "Bagna càuda", price: "¥1848" },
+                  { name: "-Refill sauce", price: "¥275" },
+                  { name: "Mature bacon and spinach salad", price: "¥1298" },
+                  { name: "Caesar salad with prosciutto", price: "¥1298" },
+                  { name: "Caprese", price: "¥1078" },
+                ]
+              },
+              {
+                name: "Appetizer",
+
+                items: [
+                  { name: "Assorted olives", price: "¥605" },
+                  { name: "Homemade pickles", price: "¥638" },
+                  { name: "Assorted prosciutto", price: "¥1518" },
+                  { name: "Assorted cheese", price: "¥1518" },
+                  { name: "Carpaccio of boiled chicken", price: "¥1078" },
+                  { name: "Carpaccio of fish", price: "¥1298" },
+                  { name: "Carpaccio of two kinds of fish", price: "¥2178" },
+                  { name: "Baguette(2piece)", price: "¥418" },
+                  { name: "Garlic bread(2piece)", price: "¥638" },
+                ]
+              },
+
+              {
+                name: "Side menu",
+
+                items: [
+                  { name: "Assorted sausage", price: "¥880" },
+                  { name: "Garlic edamame", price: "¥968" },
+                  { name: "Baked potato with butter and cheese", price: "¥1078" },
+                  { name: "Cheese Omelette(Bacon or Scallops)", price: "¥1485" },
+                  { name: "Grilled Lobster", price: "¥7348" },
+                  { name: "Roasted vegetables (Please ask our staff.)", price: "" },
+                  { name: "-1kind", price: "¥869" },
+                  { name: "-3kind", price: "¥2508" },
+                  { name: "-5kind", price: "¥4158" },
+                  { name: "Beef tendon stewed in red wine", price: "¥1628" },
+                  { name: "Shrimp and broccoli sprouts cooked in garlic sauce", price: "¥1738" },
+                  { name: "-One extra shrimp", price: "¥638" },
+                ]
+              },
+
+              {
+                name: "Meat",
+
+                items: [
+                  { name: "Rump steak", price: "¥4378" },
+                  { name: "Grilled chicken thigh", price: "¥1958" },
+                  { name: "Sirloin steak", price: "¥4268" },
+                  { name: "Chuck flap steak", price: "¥4598" },
+                  { name: "Sparerib", price: "¥2948" },
+                ]
+              },
+
+              {
+                name: "Pizza",
+
+                items: [
+                  { name: "Margherita", price: "¥1958" },
+                  { name: "Margherita with anchovy and garlic", price: "¥2068" },
+                  { name: "Topped with prosciutto and arugula", price: "¥2398" },
+                  { name: "Topped with soft salami and tomato", price: "¥2398" },
+                  { name: "Bismarck pizza", price: "¥2728" },
+                  { name: "Mushroom and chicken with cream sauce pizza", price: "¥2948" },
+                  { name: "Quattro Formaggi", price: "¥2508" },
+                  { name: "Seafood salt pizza", price: "¥2398" },
+                ]
+              },
+
+              {
+                name: "Pasta",
+
+                items: [
+                  { name: "Arrabbiata(hot tomato sauce)", price: "¥2068" },
+                  { name: "Spaghetti with Mozzarella & Bacon in Tomato Sauce", price: "¥1958" },
+                  { name: "Spaghetti with seafood and tomato sauce", price: "¥2948" },
+                  { name: "Spaghetti with Olive Oil, Garlic, Bacon, Broccoli and hot chili peppers", price: "¥1848" },
+                  { name: "Spaghetti with Vegetables, Seafood in Olive Oil", price: "¥1958" },
+                  { name: "Japanese style spaghetti with Chicken and green onion", price: "¥1958" },
+                  { name: "Spagetti Carbonara with a lot of pepper", price: "¥2068" },
+                  { name: "Spaghetti with Mentaiko and adductor muscle in Japanese style", price: "¥1958" },
+                  { name: "Spaghetti with Porcini Mushroom Cream Sauce", price: "¥2508" },
+                  { name: "Spaghetti Carbonara in Cream Sauce", price: "¥2398" },
+                  { name: "Spaghetti with Sea urchin Cream Sauce", price: "¥2508" },
+                  { name: "Spaghetti with Bolonece Sauce", price: "¥1958" },
+                  { name: "Spaghetti with onions and sausage in ketchup", price: "¥2398" }
+                ]
+              },
+
+              {
+                name: "dessert",
+
+                items: [
+                  { name: "Fondant au chocolat", price: "¥880" },
+                  { name: "Cheese tart", price: "¥880" },
+                  { name: "Catalana ice cream", price: "770" },
+                  { name: "Homemade Tiramisu", price: "¥880" },
+                  { name: "Ice cream(vanilla/black sesami/chocolate)", price: "¥440" },
+                ]
+              }
+
+            ]
+          },
+
+          drink: {
+
+            label: "Drink Menu",
+
+            categories: [
+
+              {
+                name: "Beer",
+
+                items: [
+                  { name: "Draft beer", price: "¥858" },
+                  { name: "Peroni", price: "¥1089" },
+                  { name: "Shandygaff", price: "¥869" },
+                  { name: "Non alcohol beer", price: "¥759" },
+                ]
+              },
+
+              {
+                name: "Whiskey",
+
+                items: [
+                  { name: "Highball", price: "¥759" },
+                  { name: "Lemon Highball", price: "¥814" },
+                  { name: "Ginger Highball", price: "¥825" },
+                  { name: "Coke Highball", price: "¥825" },
+                  { name: "Kaku Highball", price: "¥825" },
+                  { name: "Kaku Highball on the rocks", price: "¥825" },
+                  { name: "Kakubin whiskey with water", price: "¥825" },
+                  { name: "Hakushu Highball", price: "¥1375" },
+                  { name: "Hakushu Highball on the rocks", price: "¥1375" },
+                  { name: "Hakushu whiskey with water", price: "¥1375" },
+                ]
+              },
+
+              {
+                name: "Glass wine",
+
+                items: [
+                  { name: "Red wine , White wine", price: "¥759" },
+                  { name: "sparkling wine", price: "¥759" },
+                ]
+              },
+
+              {
+                name: "Sangria",
+
+                items: [
+                  { name: "glass", price: "¥814" },
+                  { name: "large glass", price: "¥1408" },
+                  { name: "very big glass", price: "¥7458" },
+                ]
+              },
+
+              {
+                name: "Cocktail(All 682yen)",
+
+                items: [
+                  { name: "Gin", price: "" },
+                  { name: "-Gin , tonic", price: "" },
+                  { name: "-Gin , Orange juice", price: "" },
+                  { name: "-Gin , Ginger ale", price: "" },
+                  { name: "Cassis", price: "" },
+                  { name: "-Cassis , Orange juice", price: "" },
+                  { name: "-Cassis , Grapefruit juice", price: "" },
+                  { name: "-Cassis , Soda", price: "" },
+                  { name: "-Cassis , Oolong Tea)", price: "" },
+                  { name: "Vodka", price: "" },
+                  { name: "-Vodka , Orange juice", price: "" },
+                  { name: "-Vodka , Grapefruit juice", price: "" },
+                  { name: "-Vodka , Ginger ale", price: "" },
+                  { name: "-Vodka , tonic", price: "" },
+                  { name: "Campari", price: "" },
+                  { name: "-Campari , Orange juice", price: "" },
+                  { name: "-Campari , Grapefruit juice", price: "" },
+                  { name: "-Campari , Soda", price: "" },
+                  { name: "other", price: "" },
+                  { name: "-Shochu with lemon soda", price: "" },
+                  { name: "-Shochu with lime soda", price: "" },
+                  { name: "-Shochu with grapefruit soda", price: "" },
+                  { name: "-Shochu with Oolong tea", price: "" },
+                  { name: "Original Mojiton\n(Rum+Lime+Mint+Soda)", price: "¥880" },
+                  { name: "Sake straight", price: "¥759" },
+                  { name: "Shochu or Barely liquor", price: "¥759" },
+                  { name: "-with water", price: "" },
+                  { name: "-on the rocks", price: "" },
+                  { name: "-with soda", price: "" },
+                  { name: "-straight", price: "" },
+                ]
+              },
+
+              {
+                name: "Non-alcholic cocktails (All 792yen)",
+
+                items: [
+                  { name: "Virgin Mojito", price: "" },
+                  { name: "The original cocktail", price: "" },
+                  { name: "Blue Flavoured Tonic", price: "" },
+                  { name: "Wildberry Tea Soda", price: "" },
+                  { name: "Shirley Temple", price: "" },
+                  { name: "The original calpico cocktail", price: "" },
+                ]
+              },
+
+              {
+                name: "Soft drinks (All 399yen)",
+
+                items: [
+                  { name: "Coke", price: "" },
+                  { name: "Orenge juice", price: "" },
+                  { name: "Oolong tea", price: "" },
+                  { name: "Ginger ale", price: "" },
+                  { name: "Grapefruit juice", price: "" },
+                  { name: "Tea ( Iced/Hot )", price: "" },
+                  { name: "Carbonated water(Bottle)", price: "" },
+                  { name: "Calpis Water", price: "" },
+                ]
+              },
+
+            ]
+          },
+
+          wine: {
+
+            label: "Wine Menu",
+
+            categories: [
+
+              {
+                name: "Glass wine",
+
+                items: [
+                  { name: "Angele Noir Brut(Sparkling wine)", price: "¥759" },
+                  { name: "Don Carlo Bianco(White wine)", price: "¥825" },
+                  { name: "Hobnob Chardonnay(White wine)", price: "¥869" },
+                  { name: "Fila bianco(White wine)", price: "¥902" },
+                  { name: "Don Carlo Rosso(red wine)", price: "¥825" },
+                  { name: "Alamos Malbec(red wine)", price: "¥1078" },
+                  { name: "Collezione Cinquanta(red wine)", price: "¥1628" },
+                  { name: "Gérard Bertrand Orange Gold(Orenge wine)", price: "¥1408" }
+                ]
+              },
+
+              {
+                name: "Sparkling bottle wine",
+
+                items: [
+                  { name: "Angele Noir Brut", price: "¥4048" },
+                  { name: "Lambrusco Secco(red sparkring)", price: "¥4048" },
+                  { name: "Laroska Cava", price: "¥4048" },
+                  { name: "Angele Rosé", price: "¥4158" },
+                  { name: "Serena Prosecco Brut", price: "¥5698" },
+                  { name: "Domaine Paul Mas Chardonnay Brut", price: "¥6578" },
+                  { name: "Laurent-Perrier La Cuvée", price: "¥21780" }
+                ]
+              },
+
+              {
+                name: "White wine",
+
+                items: [
+                  { name: "Don Carlo Bianco", price: "¥4048" },
+                  { name: "Primo Fiore Famouso", price: "¥4158" },
+                  { name: "Del Sur Sauvignon Blanc", price: "¥4268" },
+                  { name: "Hobnob Chardonnay", price: "¥4598" },
+                  { name: "Fontana Candida Frascati", price: "¥4708" },
+                  { name: "Fila bianco", price: "¥4818" },
+                  { name: "Feudo Arancho Dalila", price: "¥5368" },
+                  { name: "Obsession Symphony", price: "¥5808" },
+                  { name: "Gérard Bertrand Orange Gold", price: "¥8228" },
+                  { name: "Chablis La Pierre", price: "¥9658" },
+                ]
+              },
+
+              {
+                name: "Red wine",
+
+                items: [
+                  { name: "Don Carlo Rosso", price: "¥4048" },
+                  { name: "Passerelle Merlot", price: "¥4048" },
+                  { name: "Il Pumo Primitivo", price: "¥4048" },
+                  { name: "Les Tannes Occitanes Cabernet Sauvignon", price: "¥4158" },
+                  { name: "Metal Durif", price: "¥4268" },
+                  { name: "Stone Valley Red Blend", price: "¥4378" },
+                  { name: "Hobnob Pinot Noir", price: "¥4598" },
+                  { name: "Taleni Syrah", price: "¥5368" },
+                  { name: "Feudo Arancio Cantodoro", price: "¥5478" },
+                  { name: "Alamos Malbec", price: "¥5808" },
+                ]
+              },
+
+              {
+                name: "Premium red wine",
+
+                items: [
+                  { name: "Chianti Colli Senesi", price: "¥7458" },
+                  { name: "Collezione Cinquanta", price: "¥9009" },
+                  { name: "Hidden Post Cabernet Sauvignon", price: "¥12980" },
+                  { name: "Pupille", price: "¥18480" },
+                  { name: "Barolo Lelise", price: "¥21780" },
+                ]
+              },
+            ]
+          },
+
+          weekendLunch: {
+
+            label: "Weekend Lunch",
+
+            categories: [
+
+              {
+                name: "Appetizers (Cold)",
+
+                items: [
+                  { name: "Homemade Pickles", price: "¥605" },
+                  { name: "Assorted Olives", price: "¥495" },
+                  { name: "Chilled Steamed Chicken Carpaccio", price: "¥968" },
+                  { name: "Weekly Carpaccio", price: "¥1188" },
+                  { name: "Caprese with Domestic Mozzarella and High-Sweetness Tomato", price: "¥968" },
+                  { name: "Assorted Prosciutto", price: "¥1408" }
+                ]
+              },
+
+              {
+                name: "Appetizers (Hot)",
+
+                items: [
+                  { name: "Pizza Oven-Baked Cheese Potato with Butter", price: "¥968" },
+                  { name: "Sautéed Squid and Mushrooms with Soy Sauce and Butter", price: "¥858" },
+                  { name: "Steamed Mussels in Foam", price: "¥1078" },
+                  { name: "Assorted Sausages", price: "¥858" },
+                  { name: "Tender Beef Tendon Simmered in Red Wine", price: "¥1628" },
+                  { name: "Bite-Sized Exquisite Pork Ribs", price: "¥2618" },
+                  { name: "Baguette (1P)", price: "¥187" }
+                ]
+              },
+
+              {
+                name: "Salads",
+
+                items: [
+                  { name: "Elegant Prosciutto and Arugula Salad", price: "¥1078" },
+                  { name: "Hot Thick-Cut Bacon and Spinach Salad", price: "¥1078" },
+                  { name: "Premium Prosciutto Caesar Salad", price: "¥1188" },
+                ]
+              },
+
+              {
+                name: "Pizza",
+
+                items: [
+                  { name: "Classic Margherita with Carefully Selected Ingredients", price: "¥1848" },
+                  { name: "Mushroom and Prosciutto Pizza", price: "¥2068" },
+                  { name: "Seafood-Rich Pizza", price: "¥2398" },
+                  { name: "Bismarck with Soft-Boiled Egg", price: "¥2508" },
+                ]
+              },
+
+              {
+                name: "Pasta",
+
+                items: [
+                  { name: "Bacon and Asparagus Peperoncino", price: "¥1738" },
+                  { name: "Bacon and Spinach Tomato Sauce Pasta", price: "¥1848" },
+                  { name: "Monnakano's Homemade Bolognese", price: "¥1738" },
+                  { name: "Rich Porcini Mushroom Cream Pasta", price: "¥2398" },
+                  { name: "Chef's Seasonal Creative Pasta", price: "¥1958" },
+                ]
+              },
+
+              {
+                name: "Alcoholic Drinks (ALL ¥659)",
+
+                items: [
+                  { name: "Draft Beer", price: "" },
+                  { name: "Highball", price: "" },
+                  { name: "Sparkling Wine", price: "" },
+                  { name: "Glass Wine (Red)", price: "" },
+                  { name: "Glass Wine (White)", price: "" },
+                ]
+              },
+
+              {
+                name: "Soft Drinks (ALL ¥396)",
+
+                items: [
+                  { name: "Coffee (ICED/HOT)", price: "" },
+                  { name: "Tea (ICED/HOT)", price: "" },
+                  { name: "Oolong Tea", price: "" },
+                  { name: "Ginger Ale", price: "" },
+                  { name: "Cola", price: "" },
+                  { name: "Orange Juice", price: "" },
+                  { name: "Grapefruit Juice", price: "" },
+                  { name: "Calpis Water", price: "" },
+                  { name: "Calpis Soda", price: "" },
+                ]
+              },
+
+              {
+                name: "Desserts",
+
+                items: [
+                  { name: "Vanilla Ice Cream", price: "¥363" },
+                  { name: "Homemade Tiramisu (with Vanilla Ice Cream)", price: "¥880" },
+                  { name: "Fondant Chocolat (with Vanilla Ice Cream)", price: "¥880" },
+                ]
+              },
+            ]
+
+          },
+
+        }
+
+      },
+
+      /* =========================
+         SPANISH
+      ========================== */
+
+      es: {
+
+        title: "MONNAKANO",
+
+        menuTypeLabel: "Menú",
+
+        menuTypes: {
+
+          dinner: {
+
+            label: "Menú de Cena",
+
+            categories: [
+
+              {
+                name: "Ensalada",
+
+                items: [
+                  { name: "Bagna càuda", price: "¥1848" },
+                  { name: "-Salsa extra", price: "¥275" },
+                  { name: "Ensalada de espinaca y tocino curado", price: "¥1298" },
+                  { name: "Ensalada César con jamón serrano", price: "¥1298" },
+                  { name: "Caprese", price: "¥1078" },
+                ]
+              },
+
+              {
+                name: "Aperitivo",
+
+                items: [
+                  { name: "Aceitunas surtidas", price: "¥605" },
+                  { name: "Pepinillos caseros", price: "¥638" },
+                  { name: "Jamón serrano surtido", price: "¥1518" },
+                  { name: "Quesos surtidos", price: "¥1518" },
+                  { name: "Carpaccio de pollo hervido", price: "¥1078" },
+                  { name: "Carpaccio de pescado", price: "¥1298" },
+                  { name: "Carpaccio de dos tipos de pescado", price: "¥2178" },
+                  { name: "Baguette (2 piezas)", price: "¥418" },
+                  { name: "Pan de ajo (2 piezas)", price: "¥638" },
+                ]
+              },
+
+              {
+                name: "Guarniciones",
+
+                items: [
+                  { name: "Salchichas surtidas", price: "¥880" },
+                  { name: "Edamame al ajo", price: "¥968" },
+                  { name: "Papa al horno con mantequilla y queso", price: "¥1078" },
+                  { name: "Omelette de queso (tocino o vieiras)", price: "¥1485" },
+                  { name: "Langosta a la parrilla", price: "¥7348" },
+                  { name: "Verduras asadas (consulte con el personal)", price: "" },
+                  { name: "-1 tipo", price: "¥869" },
+                  { name: "-3 tipos", price: "¥2508" },
+                  { name: "-5 tipos", price: "¥4158" },
+                  { name: "Tendón de res guisado en vino tinto", price: "¥1628" },
+                  { name: "Camarones y brotes de brócoli al ajo", price: "¥1738" },
+                  { name: "-Un camarón extra", price: "¥638" },
+                ]
+              },
+
+              {
+                name: "Carne",
+
+                items: [
+                  { name: "Filete de rump", price: "¥4378" },
+                  { name: "Muslo de pollo a la parrilla", price: "¥1958" },
+                  { name: "Filete de sirloin", price: "¥4268" },
+                  { name: "Filete de aguja", price: "¥4598" },
+                  { name: "Costillas", price: "¥2948" },
+                ]
+              },
+
+              {
+                name: "Pizza",
+
+                items: [
+                  { name: "Margherita", price: "¥1958" },
+                  { name: "Margherita con anchoas y ajo", price: "¥2068" },
+                  { name: "Pizza con jamón serrano y rúcula", price: "¥2398" },
+                  { name: "Pizza con salami suave y tomate", price: "¥2398" },
+                  { name: "Pizza Bismarck", price: "¥2728" },
+                  { name: "Pizza de pollo y champiñones con salsa cremosa", price: "¥2948" },
+                  { name: "Quattro Formaggi", price: "¥2508" },
+                  { name: "Pizza marinera con sal", price: "¥2398" },
+                ]
+              },
+
+              {
+                name: "Pasta",
+
+                items: [
+                  { name: "Arrabbiata (salsa de tomate picante)", price: "¥2068" },
+                  { name: "Espagueti con mozzarella y tocino en salsa de tomate", price: "¥1958" },
+                  { name: "Espagueti con mariscos y salsa de tomate", price: "¥2948" },
+                  { name: "Espagueti con aceite de oliva, ajo, tocino, brócoli y chile picante", price: "¥1848" },
+                  { name: "Espagueti con verduras y mariscos en aceite de oliva", price: "¥1958" },
+                  { name: "Espagueti estilo japonés con pollo y cebollín", price: "¥1958" },
+                  { name: "Carbonara con mucha pimienta", price: "¥2068" },
+                  { name: "Espagueti japonés con mentaiko y vieiras", price: "¥1958" },
+                  { name: "Espagueti con salsa cremosa de hongos porcini", price: "¥2508" },
+                  { name: "Carbonara con salsa cremosa", price: "¥2398" },
+                  { name: "Espagueti con salsa cremosa de erizo de mar", price: "¥2508" },
+                  { name: "Espagueti a la boloñesa", price: "¥1958" },
+                  { name: "Espagueti con cebolla y salchicha en kétchup", price: "¥2398" }
+                ]
+              },
+
+              {
+                name: "Postre",
+
+                items: [
+                  { name: "Fondant au chocolat", price: "¥880" },
+                  { name: "Tarta de queso", price: "¥880" },
+                  { name: "Helado Catalana", price: "¥770" },
+                  { name: "Tiramisú casero", price: "¥880" },
+                  { name: "Helado (vainilla/sésamo negro/chocolate)", price: "¥440" },
+                ]
+              }
+            ],
+          },
+
+          drink: {
+
+            label: "Menú de Bebidas",
+
+            categories: [
+
+              {
+                name: "Cerveza",
+
+                items: [
+                  { name: "Cerveza de barril", price: "¥858" },
+                  { name: "Peroni", price: "¥1089" },
+                  { name: "Shandygaff", price: "¥869" },
+                  { name: "Cerveza sin alcohol", price: "¥759" },
+                ]
+              },
+
+              {
+                name: "Whisky",
+
+                items: [
+                  { name: "Highball", price: "¥759" },
+                  { name: "Highball con limón", price: "¥814" },
+                  { name: "Highball con ginger ale", price: "¥825" },
+                  { name: "Highball con cola", price: "¥825" },
+                  { name: "Kaku Highball", price: "¥825" },
+                  { name: "Kaku Highball con hielo", price: "¥825" },
+                  { name: "Whisky Kakubin con agua", price: "¥825" },
+                  { name: "Hakushu Highball", price: "¥1375" },
+                  { name: "Hakushu Highball con hielo", price: "¥1375" },
+                  { name: "Whisky Hakushu con agua", price: "¥1375" },
+                ]
+              },
+
+              {
+                name: "Vino por copa",
+
+                items: [
+                  { name: "Vino tinto , Vino blanco", price: "¥759" },
+                  { name: "Vino espumoso", price: "¥759" },
+                ]
+              },
+
+              {
+                name: "Sangría",
+
+                items: [
+                  { name: "Copa", price: "¥814" },
+                  { name: "Copa grande", price: "¥1408" },
+                  { name: "Copa muy grande", price: "¥7458" },
+                ]
+              },
+
+              {
+                name: "Cócteles (Todos ¥682)",
+
+                items: [
+                  { name: "Gin", price: "" },
+                  { name: "-Gin , tónica", price: "" },
+                  { name: "-Gin , jugo de naranja", price: "" },
+                  { name: "-Gin , ginger ale", price: "" },
+
+                  { name: "Cassis", price: "" },
+                  { name: "-Cassis , jugo de naranja", price: "" },
+                  { name: "-Cassis , jugo de toronja", price: "" },
+                  { name: "-Cassis , soda", price: "" },
+                  { name: "-Cassis , té oolong", price: "" },
+
+                  { name: "Vodka", price: "" },
+                  { name: "-Vodka , jugo de naranja", price: "" },
+                  { name: "-Vodka , jugo de toronja", price: "" },
+                  { name: "-Vodka , ginger ale", price: "" },
+                  { name: "-Vodka , tónica", price: "" },
+
+                  { name: "Campari", price: "" },
+                  { name: "-Campari , jugo de naranja", price: "" },
+                  { name: "-Campari , jugo de toronja", price: "" },
+                  { name: "-Campari , soda", price: "" },
+
+                  { name: "Otros", price: "" },
+                  { name: "-Shochu con soda de limón", price: "" },
+                  { name: "-Shochu con soda de lima", price: "" },
+                  { name: "-Shochu con soda de toronja", price: "" },
+                  { name: "-Shochu con té oolong", price: "" },
+
+                  { name: "Mojito Original\n(Ron+Lima+Menta+Soda)", price: "¥880" },
+
+                  { name: "Sake solo", price: "¥759" },
+
+                  { name: "Shochu o licor de cebada", price: "¥759" },
+                  { name: "-con agua", price: "" },
+                  { name: "-con hielo", price: "" },
+                  { name: "-con soda", price: "" },
+                  { name: "-solo", price: "" },
+                ]
+              },
+
+              {
+                name: "Cócteles sin alcohol (Todos ¥792)",
+
+                items: [
+                  { name: "Virgin Mojito", price: "" },
+                  { name: "Cóctel original", price: "" },
+                  { name: "Tónica sabor azul", price: "" },
+                  { name: "Soda de té de frutos rojos", price: "" },
+                  { name: "Shirley Temple", price: "" },
+                  { name: "Cóctel original de Calpis", price: "" },
+                ]
+              },
+
+              {
+                name: "Refrescos (Todos ¥399)",
+
+                items: [
+                  { name: "Cola", price: "" },
+                  { name: "Jugo de naranja", price: "" },
+                  { name: "Té oolong", price: "" },
+                  { name: "Ginger ale", price: "" },
+                  { name: "Jugo de toronja", price: "" },
+                  { name: "Té (frío/caliente)", price: "" },
+                  { name: "Agua con gas (botella)", price: "" },
+                  { name: "Calpis Water", price: "" },
+                ]
+              },
+            ]
+          },
+
+          wine: {
+
+            label: "Menú de Vinos",
+
+            categories: [
+
+              {
+                name: "Vino por copa",
+
+                items: [
+                  { name: "Angele Noir Brut(Vino espumoso)", price: "¥759" },
+                  { name: "Don Carlo Bianco(Vino blanco)", price: "¥825" },
+                  { name: "Hobnob Chardonnay(Vino blanco)", price: "¥869" },
+                  { name: "Fila bianco(Vino blanco)", price: "¥902" },
+                  { name: "Don Carlo Rosso(Vino tinto)", price: "¥825" },
+                  { name: "Alamos Malbec(Vino tinto)", price: "¥1078" },
+                  { name: "Collezione Cinquanta(Vino tinto)", price: "¥1628" }
+                ]
+              },
+
+              {
+                name: "Botella de vino espumoso",
+
+                items: [
+                  { name: "Angele Noir Brut", price: "¥4048" },
+                  { name: "Lambrusco Secco(Espumoso tinto)", price: "¥4048" },
+                  { name: "Laroska Cava", price: "¥4048" },
+                  { name: "Angele Rosé", price: "¥4158" },
+                  { name: "Serena Prosecco Brut", price: "¥5698" },
+                  { name: "Domaine Paul Mas Chardonnay Brut", price: "¥6578" },
+                  { name: "Laurent-Perrier La Cuvée", price: "¥21780" }
+                ]
+              },
+
+              {
+                name: "Vino blanco",
+
+                items: [
+                  { name: "Don Carlo Bianco", price: "¥4048" },
+                  { name: "Primo Fiore Famouso", price: "¥4158" },
+                  { name: "Del Sur Sauvignon Blanc", price: "¥4268" },
+                  { name: "Hobnob Chardonnay", price: "¥4598" },
+                  { name: "Fontana Candida Frascati", price: "¥4708" },
+                  { name: "Fila bianco", price: "¥4818" },
+                  { name: "Feudo Arancho Dalila", price: "¥5368" },
+                  { name: "Obsession Symphony", price: "¥5808" },
+                  { name: "Gérard Bertrand Orange Gold", price: "¥8228" },
+                  { name: "Chablis La Pierre", price: "¥9658" },
+                ]
+              },
+
+              {
+                name: "Vino tinto",
+
+                items: [
+                  { name: "Don Carlo Rosso", price: "¥4048" },
+                  { name: "Passerelle Merlot", price: "¥4048" },
+                  { name: "Il Pumo Primitivo", price: "¥4048" },
+                  { name: "Les Tannes Occitanes Cabernet Sauvignon", price: "¥4158" },
+                  { name: "Metal Durif", price: "¥4268" },
+                  { name: "Stone Valley Red Blend", price: "¥4378" },
+                  { name: "Hobnob Pinot Noir", price: "¥4598" },
+                  { name: "Taleni Syrah", price: "¥5368" },
+                  { name: "Feudo Arancio Cantodoro", price: "¥5478" },
+                  { name: "Alamos Malbec", price: "¥5808" },
+                ]
+              },
+
+              {
+                name: "Vino tinto premium",
+
+                items: [
+                  { name: "Chianti Colli Senesi", price: "¥7458" },
+                  { name: "Collezione Cinquanta", price: "¥9009" },
+                  { name: "Hidden Post Cabernet Sauvignon", price: "¥12980" },
+                  { name: "Pupille", price: "¥18480" },
+                  { name: "Barolo Lelise", price: "¥21780" },
+                ]
+              },
+            ]
+          },
+
+          weekendLunch: {
+
+            label: "Almuerzo de Fin de Semana",
+
+            categories: [
+
+              {
+                name: "Entrantes (Fríos)",
+
+                items: [
+                  { name: "Encurtidos Caseros", price: "¥605" },
+                  { name: "Variedad de Aceitunas", price: "¥495" },
+                  { name: "Carpaccio de Pollo al Vapor Frío", price: "¥968" },
+                  { name: "Carpaccio de la Semana", price: "¥1188" },
+                  { name: "Caprese con Mozzarella Nacional y Tomate de Alta Dulzura", price: "¥968" },
+                  { name: "Variedad de Prosciutto", price: "¥1408" }
+                ]
+              },
+
+              {
+                name: "Entrantes (Calientes)",
+
+                items: [
+                  { name: "Patata con Queso y Mantequilla Horneada en Horno de Pizza", price: "¥968" },
+                  { name: "Salteado de Calamares y Champiñones con Salsa de Soja y Mantequilla", price: "¥858" },
+                  { name: "Mejillones al Vapor en Espuma", price: "¥1078" },
+                  { name: "Variedad de Salchichas", price: "¥858" },
+                  { name: "Tierno Tendón de Ternera Estofado en Vino Tinto", price: "¥1628" },
+                  { name: "Exquisitas Costillas de Cerdo en Trozos del Tamaño de un Bocado", price: "¥2618" },
+                  { name: "Baguette (1P)", price: "¥187" }
+                ]
+              },
+
+              {
+                name: "Ensaladas",
+
+                items: [
+                  { name: "Elegante Ensalada de Prosciutto y Rúcula", price: "¥1078" },
+                  { name: "Ensalada de Espinacas y Bacon Grueso Caliente", price: "¥1078" },
+                  { name: "Ensalada César con Prosciutto Premium", price: "¥1188" },
+                ]
+              },
+
+              {
+                name: "Pizza",
+
+                items: [
+                  { name: "Margherita Clásica con Ingredientes Cuidadosamente Seleccionados", price: "¥1848" },
+                  { name: "Pizza de Champiñones y Prosciutto", price: "¥2068" },
+                  { name: "Pizza Rica en Mariscos", price: "¥2398" },
+                  { name: "Bismarck con Huevo Poché", price: "¥2508" },
+                ]
+              },
+
+              {
+                name: "Pasta",
+
+                items: [
+                  { name: "Peperoncino de Bacon y Espárragos", price: "¥1738" },
+                  { name: "Pasta con Salsa de Tomate, Bacon y Espinacas", price: "¥1848" },
+                  { name: "Bolonesa Casera de Monnakano", price: "¥1738" },
+                  { name: "Pasta de Crema Rica con Hongos Porcini", price: "¥2398" },
+                  { name: "Pasta Creativa Estacional del Chef", price: "¥1958" },
+                ]
+              },
+
+              {
+                name: "Bebidas Alcohólicas (TODAS ¥659)",
+
+                items: [
+                  { name: "Cerveza de Barril", price: "" },
+                  { name: "Highball", price: "" },
+                  { name: "Vino Espumoso", price: "" },
+                  { name: "Vino por Copa (Tinto)", price: "" },
+                  { name: "Vino por Copa (Blanco)", price: "" },
+                ]
+              },
+
+              {
+                name: "Refrescos (TODOS ¥396)",
+
+                items: [
+                  { name: "Café (FRÍO/CALIENTE)", price: "" },
+                  { name: "Té (FRÍO/CALIENTE)", price: "" },
+                  { name: "Té Oolong", price: "" },
+                  { name: "Ginger Ale", price: "" },
+                  { name: "Cola", price: "" },
+                  { name: "Zumo de Naranja", price: "" },
+                  { name: "Zumo de Pomelo", price: "" },
+                  { name: "Calpis Water", price: "" },
+                  { name: "Calpis Soda", price: "" },
+                ]
+              },
+
+              {
+                name: "Postres",
+
+                items: [
+                  { name: "Helado de Vainilla", price: "¥363" },
+                  { name: "Tiramisú Casero (con Helado de Vainilla)", price: "¥880" },
+                  { name: "Fondant de Chocolate (con Helado de Vainilla)", price: "¥880" },
+                ]
+              },
+            ]
+
+          },
+
+        },
+
+      },
+
+
+
+      /* =========================
+         CHINESE
+      ========================== */
+
+      zh: {
+
+        title: "MONNAKANO",
+
+        menuTypeLabel: "Menu",
+
+        menuTypes: {
+
+          dinner: {
+
+            label: "晚餐菜单",
+
+            categories: [
+
+              {
+                name: "沙拉",
+
+                items: [
+                  { name: "香蒜凤尾鱼热蘸酱", price: "¥1848" },
+                  { name: "-追加酱料", price: "¥275" },
+                  { name: "熟成培根菠菜沙拉", price: "¥1298" },
+                  { name: "生火腿凯撒沙拉", price: "¥1298" },
+                  { name: "卡普雷塞沙拉", price: "¥1078" },
+                ]
+              },
+
+              {
+                name: "前菜",
+
+                items: [
+                  { name: "综合橄榄", price: "¥605" },
+                  { name: "自制腌菜", price: "¥638" },
+                  { name: "生火腿拼盘", price: "¥1518" },
+                  { name: "奶酪拼盘", price: "¥1518" },
+                  { name: "鸡肉卡帕乔", price: "¥1078" },
+                  { name: "鲜鱼卡帕乔", price: "¥1298" },
+                  { name: "双拼鲜鱼卡帕乔", price: "¥2178" },
+                  { name: "法棍面包(2片)", price: "¥418" },
+                  { name: "蒜香面包(2片)", price: "¥638" },
+                ]
+              },
+
+              {
+                name: "小食",
+
+                items: [
+                  { name: "香肠拼盘", price: "¥880" },
+                  { name: "蒜香毛豆", price: "¥968" },
+                  { name: "黄油芝士烤土豆", price: "¥1078" },
+                  { name: "芝士蛋卷（培根或扇贝柱）", price: "¥1485" },
+                  { name: "烤龙虾", price: "¥7348" },
+                  { name: "烤蔬菜（请咨询店员）", price: "" },
+                  { name: "-1种", price: "¥869" },
+                  { name: "-3种", price: "¥2508" },
+                  { name: "-5种", price: "¥4158" },
+                  { name: "红酒炖牛筋", price: "¥1628" },
+                  { name: "蒜香虾仁西兰花苗", price: "¥1738" },
+                  { name: "-追加1只虾", price: "¥638" },
+                ]
+              },
+
+              {
+                name: "肉类",
+
+                items: [
+                  { name: "臀肉牛排", price: "¥4378" },
+                  { name: "烤鸡腿肉", price: "¥1958" },
+                  { name: "西冷牛排", price: "¥4268" },
+                  { name: "嫩肩牛排", price: "¥4598" },
+                  { name: "排骨", price: "¥2948" },
+                ]
+              },
+
+              {
+                name: "披萨",
+
+                items: [
+                  { name: "玛格丽特披萨", price: "¥1958" },
+                  { name: "凤尾鱼蒜香玛格丽特披萨", price: "¥2068" },
+                  { name: "生火腿芝麻菜披萨", price: "¥2398" },
+                  { name: "意式香肠番茄披萨", price: "¥2398" },
+                  { name: "俾斯麦披萨", price: "¥2728" },
+                  { name: "奶油鸡肉蘑菇披萨", price: "¥2948" },
+                  { name: "四种奶酪披萨", price: "¥2508" },
+                  { name: "海鲜盐味披萨", price: "¥2398" },
+                ]
+              },
+
+              {
+                name: "意面",
+
+                items: [
+                  { name: "阿拉比亚塔辣番茄意面", price: "¥2068" },
+                  { name: "马苏里拉芝士培根番茄意面", price: "¥1958" },
+                  { name: "海鲜番茄意面", price: "¥2948" },
+                  { name: "橄榄油蒜香培根西兰花辣椒意面", price: "¥1848" },
+                  { name: "蔬菜海鲜橄榄油意面", price: "¥1958" },
+                  { name: "日式鸡肉葱香意面", price: "¥1958" },
+                  { name: "黑胡椒卡邦尼意面", price: "¥2068" },
+                  { name: "明太子扇贝柱日式意面", price: "¥1958" },
+                  { name: "牛肝菌奶油意面", price: "¥2508" },
+                  { name: "奶油卡邦尼意面", price: "¥2398" },
+                  { name: "海胆奶油意面", price: "¥2508" },
+                  { name: "博洛尼亚肉酱意面", price: "¥1958" },
+                  { name: "洋葱香肠番茄酱意面", price: "¥2398" }
+                ]
+              },
+
+              {
+                name: "甜点",
+
+                items: [
+                  { name: "熔岩巧克力蛋糕", price: "¥880" },
+                  { name: "芝士挞", price: "¥880" },
+                  { name: "加泰罗尼亚冰淇淋", price: "¥770" },
+                  { name: "自制提拉米苏", price: "¥880" },
+                  { name: "冰淇淋（香草/黑芝麻/巧克力）", price: "¥440" },
+                ]
+              }
+            ]
+          },
+
+
+          drink: {
+
+            label: "饮品菜单",
+
+            categories: [
+
+              {
+                name: "啤酒",
+
+                items: [
+                  { name: "生啤酒", price: "¥858" },
+                  { name: "Peroni啤酒", price: "¥1089" },
+                  { name: "Shandygaff", price: "¥869" },
+                  { name: "无酒精啤酒", price: "¥759" },
+                ]
+              },
+
+              {
+                name: "威士忌",
+
+                items: [
+                  { name: "Highball", price: "¥759" },
+                  { name: "柠檬Highball", price: "¥814" },
+                  { name: "姜汁汽水Highball", price: "¥825" },
+                  { name: "可乐Highball", price: "¥825" },
+                  { name: "角瓶Highball", price: "¥825" },
+                  { name: "加冰角瓶Highball", price: "¥825" },
+                  { name: "角瓶威士忌兑水", price: "¥825" },
+                  { name: "白州Highball", price: "¥1375" },
+                  { name: "加冰白州Highball", price: "¥1375" },
+                  { name: "白州威士忌兑水", price: "¥1375" },
+                ]
+              },
+
+              {
+                name: "杯装葡萄酒",
+
+                items: [
+                  { name: "红葡萄酒 / 白葡萄酒", price: "¥759" },
+                  { name: "起泡葡萄酒", price: "¥759" },
+                ]
+              },
+
+              {
+                name: "桑格利亚",
+
+                items: [
+                  { name: "普通杯", price: "¥814" },
+                  { name: "大杯", price: "¥1408" },
+                  { name: "超大杯", price: "¥7458" },
+                ]
+              },
+
+              {
+                name: "鸡尾酒（全部 ¥682)",
+
+                items: [
+                  { name: "Gin", price: "" },
+                  { name: "-Gin , 汤力水", price: "" },
+                  { name: "-Gin , 橙汁", price: "" },
+                  { name: "-Gin , 姜汁汽水", price: "" },
+
+                  { name: "Cassis", price: "" },
+                  { name: "-Cassis , 橙汁", price: "" },
+                  { name: "-Cassis , 西柚汁", price: "" },
+                  { name: "-Cassis , 苏打水", price: "" },
+                  { name: "-Cassis , 乌龙茶", price: "" },
+
+                  { name: "Vodka", price: "" },
+                  { name: "-Vodka , 橙汁", price: "" },
+                  { name: "-Vodka , 西柚汁", price: "" },
+                  { name: "-Vodka , 姜汁汽水", price: "" },
+                  { name: "-Vodka , 汤力水", price: "" },
+
+                  { name: "Campari", price: "" },
+                  { name: "-Campari , 橙汁", price: "" },
+                  { name: "-Campari , 西柚汁", price: "" },
+                  { name: "-Campari , 苏打水", price: "" },
+
+                  { name: "其他", price: "" },
+                  { name: "-烧酒柠檬苏打", price: "" },
+                  { name: "-烧酒青柠苏打", price: "" },
+                  { name: "-烧酒西柚苏打", price: "" },
+                  { name: "-烧酒乌龙茶", price: "" },
+
+                  { name: "原创莫吉托\n(朗姆酒+青柠+薄荷+苏打)", price: "¥880" },
+
+                  { name: "清酒（纯饮）", price: "¥759" },
+
+                  { name: "烧酒或大麦烧酒", price: "¥759" },
+                  { name: "-兑水", price: "" },
+                  { name: "-加冰", price: "" },
+                  { name: "-兑苏打", price: "" },
+                  { name: "-纯饮", price: "" },
+                ]
+              },
+
+              {
+                name: "无酒精鸡尾酒（全部 ¥792)",
+
+                items: [
+                  { name: "Virgin Mojito", price: "" },
+                  { name: "原创鸡尾酒", price: "" },
+                  { name: "蓝色风味汤力", price: "" },
+                  { name: "野莓茶苏打", price: "" },
+                  { name: "Shirley Temple", price: "" },
+                  { name: "原创可尔必思鸡尾酒", price: "" },
+                ]
+              },
+
+              {
+                name: "软饮（全部 ¥399)",
+
+                items: [
+                  { name: "可乐", price: "" },
+                  { name: "橙汁", price: "" },
+                  { name: "乌龙茶", price: "" },
+                  { name: "姜汁汽水", price: "" },
+                  { name: "西柚汁", price: "" },
+                  { name: "红茶（冰/热）", price: "" },
+                  { name: "气泡水（瓶装）", price: "" },
+                  { name: "可尔必思水", price: "" },
+                ]
+              },
+
+            ]
+          },
+
+          wine: {
+
+            label: "酒单",
+
+            categories: [
+
+              {
+                name: "杯装葡萄酒",
+
+                items: [
+                  { name: "Angele Noir Brut(起泡酒)", price: "¥759" },
+                  { name: "Don Carlo Bianco(白葡萄酒)", price: "¥825" },
+                  { name: "Hobnob Chardonnay(白葡萄酒)", price: "¥869" },
+                  { name: "Fila bianco(白葡萄酒)", price: "¥902" },
+                  { name: "Don Carlo Rosso(红葡萄酒)", price: "¥825" },
+                  { name: "Alamos Malbec(红葡萄酒)", price: "¥1078" },
+                  { name: "Collezione Cinquanta(红葡萄酒)", price: "¥1628" }
+                ]
+              },
+
+              {
+                name: "瓶装起泡酒",
+
+                items: [
+                  { name: "Angele Noir Brut", price: "¥4048" },
+                  { name: "Lambrusco Secco(红起泡酒)", price: "¥4048" },
+                  { name: "Laroska Cava", price: "¥4048" },
+                  { name: "Angele Rosé", price: "¥4158" },
+                  { name: "Serena Prosecco Brut", price: "¥5698" },
+                  { name: "Domaine Paul Mas Chardonnay Brut", price: "¥6578" },
+                  { name: "Laurent-Perrier La Cuvée", price: "¥21780" }
+                ]
+              },
+
+              {
+                name: "白葡萄酒",
+
+                items: [
+                  { name: "Don Carlo Bianco", price: "¥4048" },
+                  { name: "Primo Fiore Famouso", price: "¥4158" },
+                  { name: "Del Sur Sauvignon Blanc", price: "¥4268" },
+                  { name: "Hobnob Chardonnay", price: "¥4598" },
+                  { name: "Fontana Candida Frascati", price: "¥4708" },
+                  { name: "Fila bianco", price: "¥4818" },
+                  { name: "Feudo Arancho Dalila", price: "¥5368" },
+                  { name: "Obsession Symphony", price: "¥5808" },
+                  { name: "Gérard Bertrand Orange Gold", price: "¥8228" },
+                  { name: "Chablis La Pierre", price: "¥9658" },
+                ]
+              },
+
+              {
+                name: "红葡萄酒",
+
+                items: [
+                  { name: "Don Carlo Rosso", price: "¥4048" },
+                  { name: "Passerelle Merlot", price: "¥4048" },
+                  { name: "Il Pumo Primitivo", price: "¥4048" },
+                  { name: "Les Tannes Occitanes Cabernet Sauvignon", price: "¥4158" },
+                  { name: "Metal Durif", price: "¥4268" },
+                  { name: "Stone Valley Red Blend", price: "¥4378" },
+                  { name: "Hobnob Pinot Noir", price: "¥4598" },
+                  { name: "Taleni Syrah", price: "¥5368" },
+                  { name: "Feudo Arancio Cantodoro", price: "¥5478" },
+                  { name: "Alamos Malbec", price: "¥5808" },
+                ]
+              },
+
+              {
+                name: "高级红葡萄酒",
+
+                items: [
+                  { name: "Chianti Colli Senesi", price: "¥7458" },
+                  { name: "Collezione Cinquanta", price: "¥9009" },
+                  { name: "Hidden Post Cabernet Sauvignon", price: "¥12980" },
+                  { name: "Pupille", price: "¥18480" },
+                  { name: "Barolo Lelise", price: "¥21780" },
+                ]
+              },
+            ]
+          },
+
+          weekendLunch: {
+
+            label: "周末午餐",
+
+            categories: [
+
+              {
+                name: "前菜（冷）",
+
+                items: [
+                  { name: "自制泡菜", price: "¥605" },
+                  { name: "什锦橄榄", price: "¥495" },
+                  { name: "冰镇蒸鸡肉卡帕奇欧", price: "¥968" },
+                  { name: "本周卡帕奇欧", price: "¥1188" },
+                  { name: "国产马苏里拉奶酪配高糖度番茄卡布里沙拉", price: "¥968" },
+                  { name: "什锦生火腿", price: "¥1408" }
+                ]
+              },
+
+              {
+                name: "前菜（温）",
+
+                items: [
+                  { name: "披萨窑烤芝士黄油土豆", price: "¥968" },
+                  { name: "黄油酱油炒鱿鱼和蘑菇", price: "¥858" },
+                  { name: "泡沫蒸贻贝", price: "¥1078" },
+                  { name: "什锦香肠", price: "¥858" },
+                  { name: "红酒慢炖软烂牛筋", price: "¥1628" },
+                  { name: "一口即食绝品烤猪排", price: "¥2618" },
+                  { name: "法棍面包 (1P)", price: "¥187" }
+                ]
+              },
+
+              {
+                name: "沙拉",
+
+                items: [
+                  { name: "优雅生火腿芝麻菜沙拉", price: "¥1078" },
+                  { name: "热乎乎厚切培根菠菜沙拉", price: "¥1078" },
+                  { name: "极品生火腿凯撒沙拉", price: "¥1188" },
+                ]
+              },
+
+              {
+                name: "披萨",
+
+                items: [
+                  { name: "严选食材经典玛格丽特披萨", price: "¥1848" },
+                  { name: "蘑菇生火腿披萨", price: "¥2068" },
+                  { name: "海鲜荟萃披萨", price: "¥2398" },
+                  { name: "溏心蛋浓郁俾斯麦披萨", price: "¥2508" },
+                ]
+              },
+
+              {
+                name: "意面",
+
+                items: [
+                  { name: "培根芦笋蒜香辣椒意面", price: "¥1738" },
+                  { name: "培根菠菜番茄酱意面", price: "¥1848" },
+                  { name: "Monnakano自制肉酱意面", price: "¥1738" },
+                  { name: "牛肝菌浓郁奶油意面", price: "¥2398" },
+                  { name: "主厨时令创意意面", price: "¥1958" },
+                ]
+              },
+
+              {
+                name: "酒精饮料 (全款 ¥659)",
+
+                items: [
+                  { name: "生啤酒", price: "" },
+                  { name: "嗨棒", price: "" },
+                  { name: "起泡酒", price: "" },
+                  { name: "杯装红葡萄酒", price: "" },
+                  { name: "杯装白葡萄酒", price: "" },
+                ]
+              },
+
+              {
+                name: "软饮料 (全款 ¥396)",
+
+                items: [
+                  { name: "咖啡 (冰/热)", price: "" },
+                  { name: "红茶 (冰/热)", price: "" },
+                  { name: "乌龙茶", price: "" },
+                  { name: "干姜汁汽水", price: "" },
+                  { name: "可乐", price: "" },
+                  { name: "橙汁", price: "" },
+                  { name: "西柚汁", price: "" },
+                  { name: "可尔必思水", price: "" },
+                  { name: "可尔必思苏打", price: "" },
+                ]
+              },
+
+              {
+                name: "甜品",
+
+                items: [
+                  { name: "香草冰淇淋", price: "¥363" },
+                  { name: "自制提拉米苏 (配香草冰淇淋)", price: "¥880" },
+                  { name: "熔岩巧克力蛋糕 (配香草冰淇淋)", price: "¥880" },
+                ]
+              },
+            ]
+
+          },
+
+        }
+
+      }
+    };
+
+    let currentLanguage = "en";
+    let currentMenuType = "dinner";
+
+    function slugify(text) {
+
+      return text
+        .toLowerCase()
+        .replace(/\s+/g, "-")
+        .replace(/[^a-z0-9\-]/g, "");
+    }
+
+    function scrollToCategory(id) {
+
+      const element = document.getElementById(id);
+
+      if (element) {
+
+        element.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+    }
+
+    function renderMenuTypeButtons() {
+
+      const wrap =
+        document.getElementById("menuTypeButtons");
+
+      wrap.innerHTML = "";
+
+      const menuTypes =
+        data[currentLanguage].menuTypes;
+
+      Object.keys(menuTypes).forEach(key => {
+
+        const btn = document.createElement("button");
+
+        btn.textContent = menuTypes[key].label;
+
+        if (key === currentMenuType) {
+          btn.classList.add("active");
+        }
+
+        btn.onclick = () => {
+
+          currentMenuType = key;
+
+          render();
+        };
+
+        wrap.appendChild(btn);
+      });
+    }
+
+    function renderCategoryButtons(categories) {
+
+      const wrap =
+        document.getElementById("categoryButtons");
+
+      wrap.innerHTML = "";
+
+      categories.forEach((category, index) => {
+
+        const btn = document.createElement("button");
+
+        const id = slugify(category.name);
+
+        btn.textContent = category.name;
+
+        if (index === 0) {
+          btn.classList.add("active");
+        }
+
+        btn.onclick = () => {
+
+          document
+            .querySelectorAll(".category-nav button")
+            .forEach(b => b.classList.remove("active"));
+
+          btn.classList.add("active");
+
+          scrollToCategory(id);
+        };
+
+        wrap.appendChild(btn);
+      });
+    }
+
+    function renderMenu() {
+
+      const menuDiv =
+        document.getElementById("menu");
+
+      menuDiv.innerHTML = "";
+
+      const currentData =
+        data[currentLanguage];
+
+      const categories =
+        currentData.menuTypes[currentMenuType]
+          .categories;
+
+      renderCategoryButtons(categories);
+
+      categories.forEach(category => {
+
+        const categoryTitle =
+          document.createElement("h2");
+
+        categoryTitle.textContent =
+          category.name;
+
+        categoryTitle.id =
+          slugify(category.name);
+
+        menuDiv.appendChild(categoryTitle);
+
+        const isCocktailCategory =
+          category.name === "Cocktail(All 682yen)" ||
+          category.name === "Cócteles (Todos ¥682)" ||
+          category.name === "鸡尾酒（全部 ¥682)";
+
+        // カクテル専用表示
+        if (isCocktailCategory) {
+
+          const wrapper =
+            document.createElement("div");
+
+          wrapper.className =
+            "cocktail-wrapper";
+
+          let currentGroup = null;
+
+          category.items.forEach(item => {
+
+            if (!item.name.startsWith("-")) {
+
+              currentGroup =
+                document.createElement("div");
+
+              currentGroup.className =
+                "cocktail-group";
+
+              currentGroup.innerHTML = `
+          <div class="cocktail-title">
+            ${item.name.replace(/\n/g, "<br>")}
+          </div>
+        `;
+
+              wrapper.appendChild(currentGroup);
+
+            }
+
+            else {
+
+              const div =
+                document.createElement("div");
+
+              div.className =
+                "cocktail-item";
+
+              div.innerHTML =
+                item.name
+                  .replace("-", "")
+                  .replace(/\n/g, "<br>");
+
+              currentGroup.appendChild(div);
+            }
+
+          });
+
+          menuDiv.appendChild(wrapper);
+
+        }
+
+        // 通常メニュー
+        else {
+          // メニューアイテムたちを包むコンテナを作る（ここでCSSの列数が適用されます）
+          const itemsContainer = document.createElement("div");
+          itemsContainer.className = "menu-items-container";
+
+          category.items.forEach(item => {
+            const div = document.createElement("div");
+            div.className = "menu-item";
+            div.innerHTML = `
+              <div class="name">
+                <span>${item.name.replace(/\n/g, "<br>")}</span>
+                <span class="price">
+                  ${item.price || ""}
+                </span>
+              </div>
+            `;
+            itemsContainer.appendChild(div);
+          });
+
+          menuDiv.appendChild(itemsContainer);
+        }
+
+      });
+
+      menuDiv.appendChild(wrapper);
+
+      return;
+    }
+    category.items.forEach(item => {
+
+      const div =
+        document.createElement("div");
+
+      div.className = "menu-item";
+
+      div.innerHTML = `
+        <div class="name">
+          <span>${item.name}</span>
+          <span class="price">${item.price}</span>
+        </div>
+      `;
+
+      menuDiv.appendChild(div);
+    });
+
+    function updateLanguageButtons() {
+
+      const buttons =
+        document.querySelectorAll(
+          "#languageButtons button"
+        );
+
+      buttons.forEach(btn =>
+        btn.classList.remove("active")
+      );
+
+      buttons.forEach(btn => {
+
+        if (
+          (currentLanguage === "en" &&
+            btn.textContent === "English") ||
+
+          (currentLanguage === "es" &&
+            btn.textContent === "Spanish") ||
+
+          (currentLanguage === "zh" &&
+            btn.textContent === "中文")
+        ) {
+
+          btn.classList.add("active");
+        }
+
+      });
+    }
+
+    function setLanguage(lang) {
+
+      currentLanguage = lang;
+
+      document.getElementById("title")
+        .textContent = data[lang].title;
+
+      document.getElementById("menuTypeLabel")
+        .textContent =
+        data[lang].menuTypeLabel;
+
+      updateLanguageButtons();
+
+      render();
+    }
+
+    function render() {
+
+      renderMenuTypeButtons();
+
+      renderMenu();
+    }
+
+    setLanguage("en");
+
+  </script>
+
+</body>
+
+</html>
