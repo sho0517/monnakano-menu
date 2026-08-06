@@ -11,7 +11,8 @@
        1. 基本・土台の設定
        ========================================================================== */
     html {
-      background-color: #3e2716; /* 画面最外縁の深みのある茶色 */
+      background-color: #3e2716;
+      /* 画面最外縁の深みのある茶色 */
     }
 
     body {
@@ -19,7 +20,8 @@
       margin: 0 auto;
       padding: 0;
       box-sizing: border-box;
-      background-color: #fbf8f3; /* メニュー背景のクリーム色 */
+      background-color: #fbf8f3;
+      /* メニュー背景のクリーム色 */
       max-width: 1200px;
       min-height: 100vh;
       border-left: 2px solid #e65c00;
@@ -60,9 +62,12 @@
     /* ★横並びにするためのコンテナ設定 */
     .controls {
       display: flex;
-      flex-wrap: wrap;       /* はみ出る場合は折り返す */
-      justify-content: center; /* 中央揃え */
-      gap: 10px;             /* ボタン同士の間隔 */
+      flex-wrap: wrap;
+      /* はみ出る場合は折り返す */
+      justify-content: center;
+      /* 中央揃え */
+      gap: 10px;
+      /* ボタン同士の間隔 */
       padding: 10px;
       background: #fbf8f3;
     }
@@ -124,9 +129,11 @@
       padding: 12px;
       box-shadow: 0 2px 8px rgba(230, 92, 0, 0.04);
       border: 1px solid #fff3e6;
-      display: flex;         /* 横並び */
+      display: flex;
+      /* 横並び */
       align-items: center;
-      gap: 14px;             /* 写真と文字の間隔 */
+      gap: 14px;
+      /* 写真と文字の間隔 */
     }
 
     /* メニュー写真 */
@@ -135,8 +142,9 @@
       height: 80px;
       min-width: 80px;
       border-radius: 8px;
-      object-fit: cover;     /* 切り抜き調整 */
-      background-color: #eaeaea; 
+      object-fit: cover;
+      /* 切り抜き調整 */
+      background-color: #eaeaea;
     }
 
     /* 画像がない場合のプレースホルダー */
@@ -166,15 +174,19 @@
     .name {
       font-weight: bold;
       font-size: 18px;
-      color: #3e2716;     /* ハッキリ読めるように濃い茶色に変更 */
-      text-shadow: none;  /* フチ取りをオフにしてスッキリ読みやすく */
+      color: #3e2716;
+      /* ハッキリ読めるように濃い茶色に変更 */
+      text-shadow: none;
+      /* フチ取りをオフにしてスッキリ読みやすく */
     }
 
     .price {
       font-size: 16px;
       font-weight: bold;
-      color: #e65c00;     /* 価格はアクセントとしてオレンジに */
-      text-shadow: none;  /* フチ取りをオフ */
+      color: #e65c00;
+      /* 価格はアクセントとしてオレンジに */
+      text-shadow: none;
+      /* フチ取りをオフ */
     }
 
     /* カクテルセクション */
@@ -227,6 +239,7 @@
         top: 0;
         z-index: 999;
       }
+
       #menuTypeButtons {
         display: flex;
         overflow-x: auto;
@@ -238,6 +251,7 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
         justify-content: center;
       }
+
       .category-nav {
         display: flex;
         overflow-x: auto;
@@ -249,27 +263,37 @@
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
         justify-content: center;
       }
+
       #menu {
         padding: 16px;
       }
+
       .menu-items-container {
         display: grid;
         grid-template-columns: 1fr;
         gap: 12px;
       }
-      header { font-size: 24px; }
-      h2 { font-size: 22px; }
+
+      header {
+        font-size: 24px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
     }
 
     /* ==========================================================================
        5. PC・タブレット版（画面幅 768px 以上）
        ========================================================================== */
     @media (min-width: 768px) {
-      .controls, 
-      #menuTypeButtons, 
+
+      .controls,
+      #menuTypeButtons,
       .category-nav {
         display: flex;
-        flex-direction: row;     /* PC版でも縦組みにせず、横並びを維持 */
+        flex-direction: row;
+        /* PC版でも縦組みにせず、横並びを維持 */
         flex-wrap: wrap;
         justify-content: center;
         padding: 10px !important;
@@ -301,6 +325,7 @@
         font-size: 32px;
         padding: 20px;
       }
+
       h2 {
         font-size: 26px;
         margin-top: 10px;
@@ -344,7 +369,7 @@
               {
                 name: "Salad",
                 items: [
-                  { name: "Bagna càuda",jpName: "バーニャカウダ", price: "¥1848", image: "" },
+                  { name: "Bagna càuda", jpName: "バーニャカウダ", price: "¥1848", image: "" },
                   { name: "-Refill sauce", price: "¥275" },
                   { name: "Mature bacon and spinach salad", price: "¥1298", image: "れん草.jpg" },
                   { name: "Caesar salad with prosciutto", price: "¥1298", image: "シーザー.jpg" },
@@ -1519,7 +1544,7 @@
               ? `<img src="${item.image}" alt="${item.name}" class="menu-item-img">`
               : `<div class="no-image-placeholder">No Image</div>`;
 
-           div.innerHTML = `
+            div.innerHTML = `
               ${imageHtml}
               <div class="menu-item-info">
               <div class="name">
