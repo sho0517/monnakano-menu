@@ -1519,13 +1519,14 @@
               ? `<img src="${item.image}" alt="${item.name}" class="menu-item-img">`
               : `<div class="no-image-placeholder">No Image</div>`;
 
-            div.innerHTML = `
+           div.innerHTML = `
               ${imageHtml}
               <div class="menu-item-info">
-                <div class="name">
-                  <span>${item.name}</span>
-                </div>
-                <div class="price">${item.price}</div>
+              <div class="name">
+               <span>${item.name}</span>
+                ${item.jpName ? `<div style="font-size: 0.8em; color: gray;">${item.jpName}</div>` : ''}
+              </div>
+              <div class="price">${item.price}</div>
               </div>
             `;
             itemsContainer.appendChild(div);
