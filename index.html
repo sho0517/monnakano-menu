@@ -230,6 +230,21 @@
         0px 1px 0 #943b00, 0px -1px 0 #943b00;
     }
 
+    .cocktail-detail {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+      color: #666;
+      font-size: 0.9em;
+    }
+
+    .cocktail-price {
+      flex-shrink: 0;
+      color: #e65c00;
+      font-weight: bold;
+    }
+
     /* ==========================================================================
        4. スマホ版（画面幅 767px 以下）
        ========================================================================== */
@@ -439,7 +454,7 @@
                 name: "Pasta",
                 jpName: "パスタ",
                 items: [
-                  { name: "Arrabbiata(hot tomato sauce)", jpName: "アラビアータ（旨辛トマトソース）", price: "¥2068", image: "" },
+              { name: "Arrabbiata(hot tomato sauce)", jpName: "アラビアータ（旨辛トマトソース）", price: "¥1628", image: "" },
                   { name: "Spaghetti with Mozzarella & Bacon in Tomato Sauce", jpName: "モッツァレラとベーコンのトマトソース", price: "¥1958", image: "BTP.png" },
                   { name: "Spaghetti with seafood and tomato sauce", jpName: "シーフードトマトパスタ（ペスカトーレ）", price: "¥2948", image: "ペスカトーレ.png" },
                   { name: "Spaghetti with Olive Oil, Garlic, Bacon, Broccoli and hot chili peppers", jpName: "ベーコンとブロッコリーのペペロンチーノ", price: "¥1848", image: "ぺぺ.JPEG" },
@@ -484,7 +499,7 @@
                 name: "Whiskey",
                 jpName: "ウイスキー",
                 items: [
-                  { name: "Highball", jpName: "ハイボール", price: "¥759" },
+              { name: "Jim Beam and soda", jpName: "ハイボール", price: "¥759" },
                   { name: "Lemon Highball", jpName: "レモンハイボール", price: "¥814" },
                   { name: "Ginger Highball", jpName: "ジンジャーハイボール", price: "¥825" },
                   { name: "Coke Highball", jpName: "コークハイボール", price: "¥825" },
@@ -540,9 +555,9 @@
                   { name: "-Shochu with lime soda", jpName: "-ライムサワー", price: "" },
                   { name: "-Shochu with grapefruit soda", jpName: "-グレープフルーツサワー", price: "" },
                   { name: "-Shochu with Oolong tea", jpName: "-ウーロンハイ", price: "" },
-                  { name: "Original Mojiton\n(Rum+Lime+Mint+Soda)", jpName: "自家製モヒート\n(ラム+ライム+ミント+ソーダ)", price: "¥880" },
-                  { name: "Sake straight", jpName: "日本酒（冷・燗）", price: "¥759" },
-                  { name: "Shochu or Barely liquor", jpName: "焼酎（芋・麦）", price: "¥759" },
+              { name: "Original Mojito", jpName: "オリジナルモヒート", price: "¥968" },
+              { name: "Sake", jpName: "日本酒", price: "¥759" },
+              { name: "Shochu or Barely shochu", jpName: "焼酎（芋・麦）", price: "¥759" },
                   { name: "-with water", jpName: "-水割り", price: "" },
                   { name: "-on the rocks", jpName: "-ロック", price: "" },
                   { name: "-with soda", jpName: "-ソーダ割り", price: "" },
@@ -562,8 +577,8 @@
                 ]
               },
               {
-                name: "Soft drinks (All 399yen)",
-                jpName: "ソフトドリンク（ALL 399円）",
+              name: "Soft drinks (All 439yen)",
+              jpName: "ソフトドリンク（ALL 439円）",
                 items: [
                   { name: "Coke", jpName: "コカ・コーラ", price: "" },
                   { name: "Orenge juice", jpName: "オレンジジュース", price: "" },
@@ -571,8 +586,8 @@
                   { name: "Ginger ale", jpName: "ジンジャーエール", price: "" },
                   { name: "Grapefruit juice", jpName: "グレープフルーツジュース", price: "" },
                   { name: "Tea ( Iced/Hot )", jpName: "紅茶（アイス/ホット）", price: "" },
-                  { name: "S.Pellegrino", jpName: "サンペレグリノ", price: "¥1320" },
-                  { name: "Calpis Water", jpName: "カルピスウォーター", price: "" }
+              { name: "S.Pellegrino (750ml)", jpName: "サンペレグリノ (750ml)", price: "¥1320" },
+              { name: "Calpico", jpName: "カルピスウォーター", price: "" }
                 ]
               }
             ]
@@ -584,7 +599,7 @@
                 name: "Glass wine",
                 jpName: "グラスワイン",
                 items: [
-                  { name: "Angele Noir Brut(Sparkling wine)", jpName: "アンジェル・ノワール・ブリュット（スパークリング）", price: "¥759" },
+              { name: "Angele Noir Brut(Sparkling wine)", jpName: "アンジュエール・ノワール", price: "¥759" },
                   { name: "Don Carlo Bianco(White wine)", jpName: "ドン・カルロ・ビアンコ（白）", price: "¥825" },
                   { name: "Hobnob Chardonnay(White wine)", jpName: "ホブノブ・シャルドネ（白）", price: "¥869" },
                   { name: "Fila bianco(White wine)", jpName: "フィラ・ビアンコ（白）", price: "¥902" },
@@ -598,9 +613,9 @@
                 name: "Sparkling bottle wine",
                 jpName: "スパークリングボトル",
                 items: [
-                  { name: "Angele Noir Brut", jpName: "アンジェル・ノワール・ブリュット", price: "¥4048" },
+              { name: "Angele Noir Brut", jpName: "アンジュエール・ノワール", price: "¥4048" },
                   { name: "Lambrusco Secco(red sparkring)", jpName: "ランブルスコ・セッコ（赤微発泡）", price: "¥4048" },
-                  { name: "Laroska Cava", jpName: "ラロスカ・カヴァ", price: "¥4048" },
+              { name: "La Rosca Brut Cava", jpName: "ラロスカ・カヴァ", price: "¥4048" },
                   { name: "Angele Rosé", jpName: "アンジェル・ロゼ", price: "¥4158" },
                   { name: "Serena Prosecco Brut", jpName: "セレナ・プロセッコ・ブリュット", price: "¥5698" },
                   { name: "Domaine Paul Mas Chardonnay Brut", jpName: "ドメーヌ・ポール・マス・シャルドネ・ブリュット", price: "¥6578" },
@@ -715,7 +730,7 @@
                 jpName: "アルコールドリンク（ALL 659円）",
                 items: [
                   { name: "Draft Beer", jpName: "生ビール", price: "" },
-                  { name: "Highball", jpName: "ハイボール", price: "" },
+                  { name: "Jim Beam and soda", jpName: "ハイボール", price: "" },
                   { name: "Sparkling Wine", jpName: "スパークリングワイン", price: "" },
                   { name: "Glass Wine (Red)", jpName: "グラスワイン（赤）", price: "" },
                   { name: "Glass Wine (White)", jpName: "グラスワイン（白）", price: "" }
@@ -732,7 +747,7 @@
                   { name: "Cola", jpName: "コーラ", price: "" },
                   { name: "Orange Juice", jpName: "オレンジジュース", price: "" },
                   { name: "Grapefruit Juice", jpName: "グレープフルーツジュース", price: "" },
-                  { name: "Calpis Water", jpName: "カルピスウォーター", price: "" },
+                  { name: "Calpico", jpName: "カルピスウォーター", price: "" },
                   { name: "Calpis Soda", jpName: "カルピスソーダ", price: "" }
                 ]
               },
@@ -829,7 +844,7 @@
                 name: "Pasta",
                 jpName: "パスタ",
                 items: [
-                  { name: "Arrabbiata (Salsa de tomate picante)", jpName: "アラビアータ", price: "¥2068", image: "" },
+              { name: "Arrabbiata (Salsa de tomate picante)", jpName: "アラビアータ", price: "¥1628", image: "" },
                   { name: "Espaguetis con mozzarella y bacon en salsa de tomate", jpName: "モッツァレラとベーコンのトマトソース", price: "¥1958", image: "BTP.png" },
                   { name: "Espaguetis con marisco y salsa de tomate", jpName: "ペスカトーレ", price: "¥2948", image: "ペスカトーレ.png" },
                   { name: "Espaguetis con aceite de oliva, ajo, bacon, brócoli y guindilla", jpName: "ベーコンとブロッコリーのペペロンチーノ", price: "¥1848", image: "ぺぺ.JPEG" },
@@ -874,7 +889,7 @@
                 name: "Whisky",
                 jpName: "ウイスキー",
                 items: [
-                  { name: "Highball", jpName: "ハイボール", price: "¥759" },
+              { name: "Jim Beam and soda", jpName: "ハイボール", price: "¥759" },
                   { name: "Highball de limón", jpName: "レモンハイボール", price: "¥814" },
                   { name: "Highball de jengibre", jpName: "ジンジャーハイボール", price: "¥825" },
                   { name: "Highball de cola", jpName: "コークハイボール", price: "¥825" },
@@ -930,9 +945,9 @@
                   { name: "-Shochu con soda de lima", jpName: "ライムサワー", price: "" },
                   { name: "-Shochu con soda de pomelo", jpName: "グレープフルーツサワー", price: "" },
                   { name: "-Shochu con té oolong", jpName: "ウーロンハイ", price: "" },
-                  { name: "Mojito original\n(Ron + Lima + Menta + Soda)", jpName: "オリジナルモヒート", price: "¥880" },
-                  { name: "Sake puro", jpName: "純米酒", price: "¥759" },
-                  { name: "Shochu o destilado de cebada", jpName: "焼酎 麦・芋", price: "¥759" },
+              { name: "Original Mojito", jpName: "オリジナルモヒート", price: "¥968" },
+              { name: "Sake", jpName: "日本酒", price: "¥759" },
+              { name: "Shochu or Barely shochu", jpName: "焼酎（芋・麦）", price: "¥759" },
                   { name: "-con agua", jpName: "水割り", price: "" },
                   { name: "-con hielo", jpName: "ロック", price: "" },
                   { name: "-con soda", jpName: "ソーダ割り", price: "" },
@@ -952,8 +967,8 @@
                 ]
               },
               {
-                name: "Refrescos (Todos 399 yenes)",
-                jpName: "ソフトドリンク ALL 399円",
+              name: "Refrescos (Todos 439 yenes)",
+              jpName: "ソフトドリンク ALL 439円",
                 items: [
                   { name: "Coca Cola", jpName: "コカ・コーラ", price: "" },
                   { name: "Zumo de naranja", jpName: "オレンジジュース", price: "" },
@@ -961,8 +976,8 @@
                   { name: "Ginger ale", jpName: "ジンジャーエール", price: "" },
                   { name: "Zumo de pomelo", jpName: "グレープフルーツジュース", price: "" },
                   { name: "Té (Frío / Caliente)", jpName: "紅茶 アイス/ホット", price: "" },
-                  { name: "S.Pellegrino", jpName: "サンペレグリノ", price: "¥1320" },
-                  { name: "Calpis sin gas", jpName: "カルピス", price: "" }
+              { name: "S.Pellegrino (750ml)", jpName: "サンペレグリノ (750ml)", price: "¥1320" },
+              { name: "Calpico", jpName: "カルピス", price: "" }
                 ]
               }
             ]
@@ -974,7 +989,7 @@
                 name: "Vino por copa",
                 jpName: "グラスワイン",
                 items: [
-                  { name: "Angele Noir Brut (Vino espumoso)", jpName: "アンジュエール ブリュット", price: "¥759" },
+              { name: "Angele Noir Brut (Vino espumoso)", jpName: "アンジュエール・ノワール", price: "¥759" },
                   { name: "Don Carlo Bianco (Vino blanco)", jpName: "ドン カルロ ビアンコ", price: "¥825" },
                   { name: "Hobnob Chardonnay (Vino blanco)", jpName: "オブノブ シャルドネ", price: "¥869" },
                   { name: "Fila bianco (Vino blanco)", jpName: "フィーラ ビアンコ", price: "¥902" },
@@ -988,9 +1003,9 @@
                 name: "Botella de vino espumoso",
                 jpName: "スパークリングボトル",
                 items: [
-                  { name: "Angele Noir Brut", jpName: "アンジュエール ブリュット", price: "¥4048" },
+              { name: "Angele Noir Brut", jpName: "アンジュエール・ノワール", price: "¥4048" },
                   { name: "Lambrusco Secco (Espumoso tinto)", jpName: "ランブルスコ セッコ", price: "¥4048" },
-                  { name: "Laroska Cava", jpName: "ラロスカ カヴァ", price: "¥4048" },
+              { name: "La Rosca Brut Cava", jpName: "ラロスカ カヴァ", price: "¥4048" },
                   { name: "Angele Rosé", jpName: "アンジュエール ロゼ", price: "¥4158" },
                   { name: "Serena Prosecco Brut", jpName: "セレーナ プロセッコ ブリュット", price: "¥5698" },
                   { name: "Domaine Paul Mas Chardonnay Brut", jpName: "ドメーヌ ポール マス シャルドネ ブリュット", price: "¥6578" },
@@ -1105,7 +1120,7 @@
                 jpName: "アルコール ALL 659円",
                 items: [
                   { name: "Cerveza de barril", jpName: "生ビール", price: "" },
-                  { name: "Highball", jpName: "ハイボール", price: "" },
+                  { name: "Jim Beam and soda", jpName: "ハイボール", price: "" },
                   { name: "Vino espumoso", jpName: "スパークリングワイン", price: "" },
                   { name: "Vino por copa (Tinto)", jpName: "グラスワイン 赤", price: "" },
                   { name: "Vino por copa (Blanco)", jpName: "グラスワイン 白", price: "" }
@@ -1122,7 +1137,7 @@
                   { name: "Cola", jpName: "コーラ", price: "" },
                   { name: "Zumo de naranja", jpName: "オレンジジュース", price: "" },
                   { name: "Zumo de pomelo", jpName: "グレープフルーツジュース", price: "" },
-                  { name: "Calpis sin gas", jpName: "カルピス", price: "" },
+                  { name: "Calpico", jpName: "カルピス", price: "" },
                   { name: "Calpis con gas", jpName: "カルピスソーダ", price: "" }
                 ]
               },
@@ -1219,7 +1234,7 @@
                 name: "意面",
                 jpName: "パスタ",
                 items: [
-                  { name: "香辣番茄意面", jpName: "アラビアータ", price: "¥2068", image: "" },
+              { name: "香辣番茄意面", jpName: "アラビアータ", price: "¥1628", image: "" },
                   { name: "马苏里拉芝士培根番茄意面", jpName: "モッツァレラとベーコンのトマトソース", price: "¥1958", image: "BTP.png" },
                   { name: "海鲜番茄意面", jpName: "ペスカトーレ", price: "¥2948", image: "ペスカトーレ.png" },
                   { name: "培根西兰花蒜香辣椒意面", jpName: "ベーコンとブロッコリーのペペロンチーノ", price: "¥1848", image: "ぺぺ.JPEG" },
@@ -1264,7 +1279,7 @@
                 name: "威士忌",
                 jpName: "ウイスキー",
                 items: [
-                  { name: "高球饮品", jpName: "ハイボール", price: "¥759" },
+              { name: "Jim Beam and soda", jpName: "ハイボール", price: "¥759" },
                   { name: "柠檬高球", jpName: "レモンハイボール", price: "¥814" },
                   { name: "姜汁高球", jpName: "ジンジャーハイボール", price: "¥825" },
                   { name: "可乐高球", jpName: "コークハイボール", price: "¥825" },
@@ -1320,9 +1335,9 @@
                   { name: "-青柠烧酒苏打", jpName: "ライムサワー", price: "" },
                   { name: "-西柚烧酒苏打", jpName: "グレープフルーツサワー", price: "" },
                   { name: "-乌龙高", jpName: "ウーロンハイ", price: "" },
-                  { name: "招牌莫吉托", jpName: "オリジナルモヒート", price: "¥880" },
-                  { name: "纯米清酒", jpName: "純米酒", price: "¥759" },
-                  { name: "烧酒 (麦 / 芋)", jpName: "焼酎 麦・芋", price: "¥759" },
+              { name: "Original Mojito", jpName: "オリジナルモヒート", price: "¥968" },
+              { name: "Sake", jpName: "日本酒", price: "¥759" },
+              { name: "Shochu or Barely shochu", jpName: "焼酎（芋・麦）", price: "¥759" },
                   { name: "-加水", jpName: "水割り", price: "" },
                   { name: "-加冰", jpName: "ロック", price: "" },
                   { name: "-加苏打水", jpName: "ソーダ割り", price: "" },
@@ -1342,8 +1357,8 @@
                 ]
               },
               {
-                name: "软饮 均一价 399日元",
-                jpName: "ソフトドリンク ALL 399円",
+              name: "软饮 均一价 439日元",
+              jpName: "ソフトドリンク ALL 439円",
                 items: [
                   { name: "可口可乐", jpName: "コカ・コーラ", price: "" },
                   { name: "橙汁", jpName: "オレンジジュース", price: "" },
@@ -1351,8 +1366,8 @@
                   { name: "干姜水", jpName: "ジンジャーエール", price: "" },
                   { name: "西柚汁", jpName: "グレープフルーツジュース", price: "" },
                   { name: "红茶 (冰 / 热)", jpName: "紅茶 アイス/ホット", price: "" },
-                  { name: "S.Pellegrino", jpName: "サンペレグリノ", price: "¥1320" },
-                  { name: "可尔必思 (无气)", jpName: "カルピス", price: "" }
+              { name: "S.Pellegrino (750ml)", jpName: "サンペレグリノ (750ml)", price: "¥1320" },
+              { name: "Calpico", jpName: "カルピス", price: "" }
                 ]
               }
             ]
@@ -1364,7 +1379,7 @@
                 name: "单杯葡萄酒",
                 jpName: "グラスワイン",
                 items: [
-                  { name: "Angele Noir Brut (起泡酒)", jpName: "アンジュエール ブリュット", price: "¥759" },
+              { name: "Angele Noir Brut (起泡酒)", jpName: "アンジュエール・ノワール", price: "¥759" },
                   { name: "Don Carlo Bianco (白葡萄酒)", jpName: "ドン カルロ ビアンコ", price: "¥825" },
                   { name: "Hobnob Chardonnay (白葡萄酒)", jpName: "オブノブ シャルドネ", price: "¥869" },
                   { name: "Fila bianco (白葡萄酒)", jpName: "フィーラ ビアンコ", price: "¥902" },
@@ -1378,9 +1393,9 @@
                 name: "瓶装起泡葡萄酒",
                 jpName: "スパークリングボトル",
                 items: [
-                  { name: "Angele Noir Brut", jpName: "アンジュエール ブリュット", price: "¥4048" },
+              { name: "Angele Noir Brut", jpName: "アンジュエール・ノワール", price: "¥4048" },
                   { name: "Lambrusco Secco (红起泡酒)", jpName: "ランブルスコ セッコ", price: "¥4048" },
-                  { name: "Laroska Cava (卡瓦)", jpName: "ラロスカ カヴァ", price: "¥4048" },
+              { name: "La Rosca Brut Cava", jpName: "ラロスカ カヴァ", price: "¥4048" },
                   { name: "Angele Rosé (桃红起泡酒)", jpName: "アンジュエール ロゼ", price: "¥4158" },
                   { name: "Serena Prosecco Brut", jpName: "セレーナ プロセッコ ブリュット", price: "¥5698" },
                   { name: "Domaine Paul Mas Chardonnay Brut", jpName: "ドメーヌ ポール マス シャルドネ ブリュット", price: "¥6578" },
@@ -1495,7 +1510,7 @@
                 jpName: "アルコール ALL 659円",
                 items: [
                   { name: "生啤酒", jpName: "生ビール", price: "" },
-                  { name: "高球饮品", jpName: "ハイボール", price: "" },
+                  { name: "Jim Beam and soda", jpName: "ハイボール", price: "" },
                   { name: "起泡葡萄酒", jpName: "スパークリングワイン", price: "" },
                   { name: "单杯红葡萄酒", jpName: "グラスワイン 赤", price: "" },
                   { name: "单杯白葡萄酒", jpName: "グラスワイン 白", price: "" }
@@ -1512,7 +1527,7 @@
                   { name: "可乐", jpName: "コーラ", price: "" },
                   { name: "橙汁", jpName: "オレンジジュース", price: "" },
                   { name: "西柚汁", jpName: "グレープフルーツジュース", price: "" },
-                  { name: "可尔必思 (无气)", jpName: "カルピス", price: "" },
+                  { name: "Calpico", jpName: "カルピス", price: "" },
                   { name: "可尔必思苏打 (有气)", jpName: "カルピスソーダ", price: "" }
                 ]
               },
@@ -1602,7 +1617,10 @@
             if (!item.name.startsWith("-")) {
               currentGroup = document.createElement("div");
               currentGroup.className = "cocktail-group";
-              currentGroup.innerHTML = `<div class="cocktail-title">${item.name.replace(/\n/g, "<br>")}</div>`;
+              const detailHtml = item.price
+                ? `<div class="cocktail-detail"><span>${item.jpName || ""}</span><span class="cocktail-price">${item.price}</span></div>`
+                : "";
+              currentGroup.innerHTML = `<div class="cocktail-title">${item.name.replace(/\n/g, "<br>")}</div>${detailHtml}`;
               wrapper.appendChild(currentGroup);
             } else {
               const div = document.createElement("div");
