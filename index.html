@@ -7,6 +7,11 @@
   <title>MONNAKANO</title>
 
   <style>
+    :root {
+      --mobile-header-height: 64px;
+      --mobile-navigation-height: 136px;
+    }
+
     /* ==========================================================================
        1. 基本・土台の設定
        ========================================================================== */
@@ -96,6 +101,27 @@
 
     button.active {
       background: #d9381e;
+      color: #fff3cc;
+    }
+
+    #menuTypeButtons button,
+    .category-nav button {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      line-height: 1.15;
+    }
+
+    .tab-jp-label {
+      color: #666;
+      font-size: 0.78em;
+      font-weight: 600;
+      text-shadow: none;
+    }
+
+    button.active .tab-jp-label {
       color: #fff3cc;
     }
 
@@ -270,28 +296,40 @@
         z-index: 999;
       }
 
+      .menu-navigation-stack {
+        position: sticky;
+        top: var(--mobile-header-height);
+        z-index: 998;
+        background: #fbf8f3;
+        box-shadow: 0 2px 7px rgba(0, 0, 0, 0.1);
+      }
+
       #menuTypeButtons {
         display: flex;
+        flex-wrap: nowrap;
         overflow-x: auto;
         padding: 12px;
         background: white;
-        position: sticky;
-        top: 72px;
-        z-index: 998;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
-        justify-content: center;
+        position: static;
+        box-shadow: none;
+        justify-content: flex-start;
+        scrollbar-width: none;
       }
 
       .category-nav {
         display: flex;
+        flex-wrap: nowrap;
         overflow-x: auto;
         padding: 12px;
         background: #fff9f2;
-        position: sticky;
-        top: 140px;
-        z-index: 997;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-        justify-content: center;
+        position: static;
+        box-shadow: inset 0 1px 0 rgba(230, 92, 0, 0.08);
+        justify-content: flex-start;
+        scrollbar-width: none;
+      }
+
+      .category-block {
+        scroll-margin-top: calc(var(--mobile-header-height) + var(--mobile-navigation-height) + 12px);
       }
 
       #menu {
@@ -380,9 +418,10 @@
     Menu
   </div>
 
-  <div class="controls" id="menuTypeButtons"></div>
-
-  <div class="category-nav" id="categoryButtons"></div>
+  <div class="menu-navigation-stack" id="menuNavigationStack">
+    <div class="controls" id="menuTypeButtons"></div>
+    <div class="category-nav" id="categoryButtons"></div>
+  </div>
 
   <div id="menu"></div>
 
@@ -409,7 +448,7 @@
               },
               {
                 name: "Appetizer",
-                jpName: "前菜",
+                jpName: "アペタイザー",
                 items: [
                   { name: "Assorted olives", jpName: "オリーブ盛り合わせ", price: "¥605", image: "" },
                   { name: "Homemade pickles", jpName: "自家製ピクルス", price: "¥638", image: "ピクルス.jpg" },
@@ -442,7 +481,7 @@
               },
               {
                 name: "Meat",
-                jpName: "肉料理",
+                jpName: "肉系",
                 items: [
                   { name: "Rump steak", jpName: "ランプステーキ（タリアータ）", price: "¥4378", image: "タリアータ.jpg" },
                   { name: "Grilled chicken thigh", jpName: "鶏もも肉のグリル", price: "¥1958", image: "鶏もも.PNG" },
@@ -799,7 +838,7 @@
               },
               {
                 name: "Entrante",
-                jpName: "前菜",
+                jpName: "アペタイザー",
                 items: [
                   { name: "Aceitunas variadas", jpName: "オリーブ盛り合わせ", price: "¥605", image: "" },
                   { name: "Encurtidos caseros", jpName: "自家製ピクルス", price: "¥638", image: "ピクルス.jpg" },
@@ -832,7 +871,7 @@
               },
               {
                 name: "Carne",
-                jpName: "肉料理",
+                jpName: "肉系",
                 items: [
                   { name: "Filete de cadera (Rump steak)", jpName: "ランプステ—キ", price: "¥4378", image: "タリアータ.jpg" },
                   { name: "Muslo de pollo a la parrilla", jpName: "鶏もも肉のグリル", price: "¥1958", image: "鶏もも.PNG" },
@@ -1189,7 +1228,7 @@
               },
               {
                 name: "前菜",
-                jpName: "前菜",
+                jpName: "アペタイザー",
                 items: [
                   { name: "拼盘橄榄", jpName: "オリーブ盛り合わせ", price: "¥605", image: "" },
                   { name: "自制泡菜", jpName: "自家製ピクルス", price: "¥638", image: "ピクルス.jpg" },
@@ -1222,7 +1261,7 @@
               },
               {
                 name: "肉类料理",
-                jpName: "肉料理",
+                jpName: "肉系",
                 items: [
                   { name: "牛臀肉牛排", jpName: "ランプステ—キ", price: "¥4378", image: "タリアータ.jpg" },
                   { name: "烤鸡腿肉", jpName: "鶏もも肉のグリル", price: "¥1958", image: "鶏もも.PNG" },
@@ -1561,13 +1600,42 @@
       },
     }
 
+    const menuTypeJapaneseLabels = {
+      dinner: "ディナーメニュー",
+      drink: "ドリンクメニュー",
+      wine: "ワインメニュー",
+      weekendLunch: "土日祝日ランチメニュー"
+    };
+
     let currentLanguage = "en";
     let currentMenuType = "dinner";
+
+    function setTabLabels(button, primaryLabel, japaneseLabel) {
+      const primary = document.createElement("span");
+      primary.className = "tab-primary-label";
+      primary.textContent = primaryLabel;
+      button.appendChild(primary);
+
+      if (japaneseLabel) {
+        const japanese = document.createElement("span");
+        japanese.className = "tab-jp-label";
+        japanese.textContent = japaneseLabel;
+        button.appendChild(japanese);
+      }
+    }
+
+    function updateStickyMeasurements() {
+      const header = document.getElementById("title");
+      const navigation = document.getElementById("menuNavigationStack");
+      document.documentElement.style.setProperty("--mobile-header-height", `${header.offsetHeight}px`);
+      document.documentElement.style.setProperty("--mobile-navigation-height", `${navigation.offsetHeight}px`);
+    }
 
     function init() {
       createMenuTypeButtons();
       renderMenu();
       updateLanguageButtons();
+      updateStickyMeasurements();
     }
 
     function createMenuTypeButtons() {
@@ -1576,7 +1644,7 @@
       const types = data[currentLanguage].menuTypes;
       for (const key in types) {
         const btn = document.createElement("button");
-        btn.textContent = types[key].label;
+        setTabLabels(btn, types[key].label, menuTypeJapaneseLabels[key]);
         if (key === currentMenuType) btn.classList.add("active");
         btn.onclick = () => {
           currentMenuType = key;
@@ -1584,6 +1652,7 @@
           buttons.forEach(b => b.classList.remove("active"));
           btn.classList.add("active");
           renderMenu();
+          requestAnimationFrame(updateStickyMeasurements);
         };
         container.appendChild(btn);
       }
@@ -1594,15 +1663,16 @@
       nav.innerHTML = "";
       categories.forEach(cat => {
         const btn = document.createElement("button");
-        btn.textContent = cat.name;
+        setTabLabels(btn, cat.name, cat.jpName);
         btn.onclick = () => {
           const target = document.getElementById("cat-" + cat.name);
           if (target) {
-            target.scrollIntoView({ behavior: "smooth" });
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
           }
         };
         nav.appendChild(btn);
       });
+      requestAnimationFrame(updateStickyMeasurements);
     }
 
     function renderMenu() {
@@ -1698,8 +1768,10 @@
       createMenuTypeButtons();
       renderMenu();
       updateLanguageButtons();
+      requestAnimationFrame(updateStickyMeasurements);
     }
 
+    window.addEventListener("resize", updateStickyMeasurements);
     window.onload = init;
   </script>
 </body>
