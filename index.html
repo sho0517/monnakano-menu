@@ -245,6 +245,21 @@
       font-weight: bold;
     }
 
+    .jp-name,
+    .cocktail-jp-name {
+      color: #666;
+      text-shadow: none;
+    }
+
+    .jp-name {
+      font-size: 0.8em;
+    }
+
+    .cocktail-jp-name {
+      margin-top: 2px;
+      font-size: 0.85em;
+    }
+
     /* ==========================================================================
        4. スマホ版（画面幅 767px 以下）
        ========================================================================== */
@@ -458,7 +473,7 @@
                   { name: "Spaghetti with Mozzarella & Bacon in Tomato Sauce", jpName: "モッツァレラとベーコンのトマトソース", price: "¥1958", image: "BTP.png" },
                   { name: "Spaghetti with seafood and tomato sauce", jpName: "シーフードトマトパスタ（ペスカトーレ）", price: "¥2948", image: "ペスカトーレ.png" },
                   { name: "Spaghetti with Olive Oil, Garlic, Bacon, Broccoli and hot chili peppers", jpName: "ベーコンとブロッコリーのペペロンチーノ", price: "¥1848", image: "ぺぺ.JPEG" },
-                  { name: "Spaghetti with Vegetables, Seafood in Olive Oil", jpName: "野菜とシーフードのオイルパスタ", price: "¥1958", image: "" },
+                  { name: "Spaghetti with Vegetables, Seafood in Olive Oil", jpName: "魚介と季節野菜の塩パスタ", price: "¥1958", image: "" },
                   { name: "Japanese style spaghetti with Chicken and green onion", jpName: "鶏肉と長ネギの和風パスタ", price: "¥1958", image: "和風パスタ.jpg" },
                   { name: "Spagetti Carbonara with a lot of pepper", jpName: "胡椒たっぷり大人のカルボナーラ", price: "¥2068", image: "大人カルボ.png" },
                   { name: "Spaghetti with Mentaiko and adductor muscle in Japanese style", jpName: "明太子と小柱の和風パスタ", price: "¥1958", image: "明パ-左90度.png" },
@@ -848,7 +863,7 @@
                   { name: "Espaguetis con mozzarella y bacon en salsa de tomate", jpName: "モッツァレラとベーコンのトマトソース", price: "¥1958", image: "BTP.png" },
                   { name: "Espaguetis con marisco y salsa de tomate", jpName: "ペスカトーレ", price: "¥2948", image: "ペスカトーレ.png" },
                   { name: "Espaguetis con aceite de oliva, ajo, bacon, brócoli y guindilla", jpName: "ベーコンとブロッコリーのペペロンチーノ", price: "¥1848", image: "ぺぺ.JPEG" },
-                  { name: "Espaguetis con verduras y marisco en aceite de oliva", jpName: "野菜とシーフードのオイルパスタ", price: "¥1958", image: "" },
+                  { name: "Espaguetis con verduras y marisco en aceite de oliva", jpName: "魚介と季節野菜の塩パスタ", price: "¥1958", image: "" },
                   { name: "Espaguetis al estilo japonés con pollo y cebolleta", jpName: "鶏肉と長ネギの和風パスタ", price: "¥1958", image: "和風パスタ.jpg" },
                   { name: "Espaguetis carbonara con mucha pimienta", jpName: "大人のカルボナーラ", price: "¥2068", image: "大人カルボ.png" },
                   { name: "Espaguetis con mentaiko y vieiras al estilo japonés", jpName: "明太子とホタテの和風パスタ", price: "¥1958", image: "明パ-左90度.png" },
@@ -1238,7 +1253,7 @@
                   { name: "马苏里拉芝士培根番茄意面", jpName: "モッツァレラとベーコンのトマトソース", price: "¥1958", image: "BTP.png" },
                   { name: "海鲜番茄意面", jpName: "ペスカトーレ", price: "¥2948", image: "ペスカトーレ.png" },
                   { name: "培根西兰花蒜香辣椒意面", jpName: "ベーコンとブロッコリーのペペロンチーノ", price: "¥1848", image: "ぺぺ.JPEG" },
-                  { name: "蔬菜海鲜香草橄榄油意面", jpName: "野菜とシーフードのオイルパスタ", price: "¥1958", image: "" },
+                  { name: "蔬菜海鲜香草橄榄油意面", jpName: "魚介と季節野菜の塩パスタ", price: "¥1958", image: "" },
                   { name: "日式鸡肉葱花意面", jpName: "鶏肉と長ネギの和風パスタ", price: "¥1958", image: "和風パスタ.jpg" },
                   { name: "浓郁黑胡椒卡邦尼意面", jpName: "大人のカルボナーラ", price: "¥2068", image: "大人カルボ.png" },
                   { name: "日式明太子扇贝意面", jpName: "明太子とホタテの和風パスタ", price: "¥1958", image: "明パ-左90度.png" },
@@ -1617,15 +1632,16 @@
             if (!item.name.startsWith("-")) {
               currentGroup = document.createElement("div");
               currentGroup.className = "cocktail-group";
-              const detailHtml = item.price
-                ? `<div class="cocktail-detail"><span>${item.jpName || ""}</span><span class="cocktail-price">${item.price}</span></div>`
+              const detailHtml = item.jpName || item.price
+                ? `<div class="cocktail-detail">${item.jpName ? `<span class="cocktail-jp-name">${item.jpName}</span>` : ""}${item.price ? `<span class="cocktail-price">${item.price}</span>` : ""}</div>`
                 : "";
               currentGroup.innerHTML = `<div class="cocktail-title">${item.name.replace(/\n/g, "<br>")}</div>${detailHtml}`;
               wrapper.appendChild(currentGroup);
             } else {
               const div = document.createElement("div");
               div.className = "cocktail-item";
-              div.innerHTML = item.name.replace("-", "").replace(/\n/g, "<br>");
+              const jpName = item.jpName ? item.jpName.replace(/^-/, "") : "";
+              div.innerHTML = `<div>${item.name.replace(/^-/, "").replace(/\n/g, "<br>")}</div>${jpName ? `<div class="cocktail-jp-name">${jpName.replace(/\n/g, "<br>")}</div>` : ""}`;
               if (currentGroup) currentGroup.appendChild(div);
             }
           });
@@ -1648,7 +1664,7 @@
               <div class="menu-item-info">
               <div class="name">
                <span>${item.name}</span>
-                ${item.jpName ? `<div style="font-size: 0.8em; color: gray;">${item.jpName}</div>` : ''}
+                ${item.jpName ? `<div class="jp-name">${item.jpName}</div>` : ''}
               </div>
               <div class="price">${item.price}</div>
               </div>
